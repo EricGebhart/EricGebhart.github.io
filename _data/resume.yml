@@ -2,102 +2,280 @@
 # If you don't have a JSON Resume you can just edit this YAML file instead.
 # See also: <https://jsonresume.org/>.
 basics:
-  name: "Richard Hendricks"
-  label: "Programmer"
-  picture: "/assets/icons/icon.png"
-  email: ""
-  phone: "(912) 555-4321"
-  website: "https://piedpiper.com"
+  name: "Eric Gebhart"
+  label: "Systems Architect, developer, Programmer"
+  picture: "/assets/img/me-mtp2.jpg"
+  email: "e.a.gebhart@protonmail.com"
+  phone: "(919) 632-1742  - US"
+  website: "https://ericgebhart.com"
   summary: >
-    Richard hails from Tulsa.
-    He has earned degrees from the University of Oklahoma and Stanford. (Go Sooners and Cardinals!)
-    Before starting Pied Piper, he worked for Hooli as a part time software developer.
-    While his work focuses on applied information theory,
-    mostly optimizing lossless compression schema of both the length-limited and adaptive variants,
-    his non-work interests range widely,
-    everything from quantum computing to chaos theory.
-    He could tell you about it, but THAT would NOT be a “length-limited” conversation!
-    Open `_data/resume.yml` to edit this text.
+    Highly creative with an ability to think out of the box and see
+    the bigger picture and the far reaching implications of software
+    design. A penchant for streamlining of workflow and processes and
+    creating the tools which enable them.
+    Happily using Arch Linux and XMonad on my Wacom tablet.
   location:
-    address: "2712 Broadway St"
-    postalCode: "CA 94115"
-    city: "San Francisco"
+    address: "13 Meyers Ave."
+    postalCode: "NC 28806"
+    city: "Asheville"
     countryCode: "US"
-    region: "California"
+    region: "North Carolina"
   profiles:
-    - network: "Twitter"
-      username: "RHendricksCEO"
-      url: ""
+    - network: "GitHub"
+      username: "EricGebhart"
+      url: "https://github.com/EricGebhart"
     - network: "LinkedIn"
-      username: "Richard Hendricks"
-      url: ""
+      username: "Eric Gebhart"
+      url: "https://www.linkedin.com/in/eric-gebhart-24678b12/"
+
+# - network: "Twitter"
+#   username: "RHendricksCEO"
+#   url: ""
+
+    # - network: "Short Edition"
+    #   username: "Ericag"
+    #   url: "https://short-edition.com/fr/auteur/ericag"
+    # - network: "Italki"
+    #   username: "Eric"
+    #   url: "https://www.italki.com/user/2708165"
+
 work:
-  - company: "Pied Piper"
-    position: "CEO/President"
-    website: "https://piedpiper.com"
-    startDate: "2013-12-01"
+  - company: "WTE llc"
+    position: "Consultant"
+    website: "https://EricGebhart.com"
+    startDate: "2016-01-01"
     endDate: ""
     summary: >
-      Pied Piper is a multi-platform technology based on a proprietary universal compression algorithm that has
-      consistently fielded high Weisman Scores™ that are not merely competitive,
-      but approach the theoretical limit of lossless compression.
+      Freelance systems development and programming, C, Clojure, Python, Database design,
+      data science, etc.
     highlights:
-      - "Build an algorithm for artist to detect if their music was violating copy right infringement laws"
-      - "Successfully won Techcrunch Disrupt"
-      - "Optimized an algorithm that holds the current world record for Weisman Scores"
-volunteer:
-  - organization: "CoderDojo"
-    position: "Teacher"
-    website: "https://coderdojo.com/"
-    startDate: "2012-01-01"
-    endDate: "2013-01-01"
-    summary: "Global movement of free coding clubs for young people."
+      - "Clojure library for better command line parsing."
+      - "Clojure library for easy integration between dfs datastores and cascalog."
+      - "System framework for analysing the extinction rate of the Lesser Prairie Chicken."
+  - company: "TangoBreath"
+    position: "Owner/Teacher"
+    website: "https://tangobreath.com"
+    startDate: "2010-01-01"
+    endDate: ""
+    summary: >
+      Teacher of Argentine tango.
     highlights:
-      - "Awarded 'Teacher of the Month'"
-education:
-  - institution: "University of Oklahoma"
-    area: "Information Technology"
-    studyType: "Bachelor"
-    startDate: "2011-06-01"
-    endDate: "2014-01-01"
-    gpa: "4.0"
-    courses:
-      - "DB1101 - Basic SQL"
-      - "CS2011 - Java Introduction"
-awards:
-  - title: "Digital Compression Pioneer Award"
-    date: "2014-11-01"
-    awarder: "Techcrunch"
-    summary: "There is no spoon."
+      - "Creator of the TangoBreath vinyasa flow."
+  - company: "Yeti Data"
+    position: "Lead engineer / Systems architect"
+    website: "https://yetidata.com"
+    startDate: "2013-01-01"
+    endDate: "2016-02-28"
+    summary: >
+        Designed and implemented a data processing system to absorb
+        and connect data from disparate systems for data analysis and
+        reporting.  All development was done with TDD and scrum.
+
+        The application is written entirely in clojure and uses Hadoop and
+        Datomic as immutable databases. The system uses Multi-threading with
+        Core-async, error reporting with Timbre.  Cascalog is used in conjunction
+        with DFS Datastores,  Fressian and Prismatic Schema for queries and data
+        manipulation. Hadoop is used for the backend and Datomic is on the front
+        end. Some customers prefer data in other shapes which we can also share.
+        The projects run on AWS.
+    highlights:
+      - "Based loosely on Nathan Mar's 'Lambda Architecture'."
+      - "Clojure library to easily clean and transform almost any data into a graph database in hadoop."
+  - company: "SAS Institute"
+    position: "Principal Systems Developer"
+    website: "https://sas.com"
+    startDate: "1995-10-02"
+    endDate: "2012-09-14"
+    summary: >
+        Eric was a strong contributor to the foundation of the SAS Output
+        Delivery System (ODS). Key visible contributions are ODS Markup /
+        Tagsets, ODS Packages, ODS Styles, Lua tagsets.
+
+        Designed and developed the Tagset programming language to enable
+        the creation of Markup Language based output types. The Tagset
+        programming language enabled an open source spirit to the creation
+        and customization of many different output types, and enabled
+        new products to come to life while also creating a more agile
+        development cycle which was free of the core system’s 2 year
+        software release schedule.
+
+        Developed many tools using Python and perhaps too much Elisp,
+        including emacs debuggers for Python, Lua and the in house
+        C compiler.
+
+        Eric wrote many papers from 2000-2010 and was invited every year
+        to SAS Global Forum as well as several regional conferences and
+        local user groups all over the country. Eric was known as an
+        entertaining presenter.
+
+    highlights:
+      - "Created The ODS Tagset language"
+      - "Created the Base object layer for almost every type of Output SAS creates."
+      - "Created ODS Packages."
+      - "Created the original ODS styles."
+      - "Was a popular invited presenter at many conferences every year"
+  - company: "Various"
+    position: "Consultant"
+    website: "https://EricGebhart.com"
+    startDate: "1984-01-01"
+    endDate: "1995-10-02"
+    summary: >
+        Primary roles in these jobs consisted of Systems and Database
+        design and software architecture. All systems were Unix. All
+        systems were Oracle and C with embedded SQL.  A common theme
+        was also the design and creation of a cross platform development
+        system and the creation of programming libraries to encapsulate
+        databases and GUI tools to facilitate rapid development and
+        a cohesive end product. The use of TROFF to create easy and
+        flexible reporting tools was also common.
+
+
+    highlights:
+      - "Northern Telecom - Created an OO database manager and state driven
+         UI framework which were used to quickly create an expansive trouble ticket
+         system for Nortel phone switches."
+
+      - "ABB - Created a cohesive cross platform development
+        environment. Designed and developed an object oriented gui
+        framework with Oracle and various GUI tools."
+
+      - "Northern Telecom - Developed code templates and function libraries
+        to expedite creation of a GUI to a worldwide system. Created a
+        reporting system using NROFF macros for easy creation of various
+        types of reports in several formats."
+
+      - "Boeing Military Aircraft - Taught OOP to engineers using Modula2."
+
+      - "Independent Oil & Gas - Created a publishing system using, Oracle,
+        C, Troff and PIC which tracked the drilling and production of
+        oil and gas wells."
+
+# volunteer:
+#   - organization: "CoderDojo"
+#     position: "Teacher"
+#     website: "https://coderdojo.com/"
+#     startDate: "2012-01-01"
+#     endDate: "2013-01-01"
+#     summary: "Global movement of free coding clubs for young people."
+#     highlights:
+#       - "Awarded 'Teacher of the Month'"
+
+# education:
+#   - institution: "Oklahoma"
+#     area: "Music"
+#     studyType: "Bachelor"
+#     startDate: "2011-06-01"
+#     endDate: "2014-01-01"
+#     gpa: "4.0"
+#     courses:
+#       - "DB1101 - Basic SQL"
+#       - "CS2011 - Java Introduction"
+# awards:
+#   - title: "Digital Compression Pioneer Award"
+#     date: "2014-11-01"
+#     awarder: "Techcrunch"
+#     summary: "There is no spoon."
+
 publications:
-  - name: "Video compression for 3d media"
-    publisher: "Hooli"
+  - name: "Various SAS Papers"
+    publisher: "SAS Institute"
     releaseDate: "2014-10-01"
-    website: "https://en.wikipedia.org/wiki/Silicon_Valley_(TV_series)"
-    summary: "Innovative middle-out compression algorithm that changes the way we store data."
+    website: "https://github.com/EricGebhart/SAS-Papers"
+    summary: "Various topics covering the Output Delivery System (ODS) in the Base SAS System."
 skills:
-  - name: "Web Development"
+  - name: "Clojure"
     level: "Master"
     keywords:
-      - "HTML"
-      - "CSS"
-      - "Javascript"
-  - name: "Compression"
+      - "Cascalog"
+      - "Hadoop"
+      - "datomic"
+      - "data transformation"
+  - name: "C"
+    level: "Master"
+  - name: "Python"
     level: "Master"
     keywords:
-      - "Mpeg"
-      - "MP4"
-      - "GIF"
+      - "Pandas"
+  - name: "Software architecture and design"
+    level: "Master"
+    keywords:
+      - "foo"
+  - name: "Unix/Linux/FreeBSD"
+    level: "Master"
+    keywords:
+      - "Unix"
+      - "Linux"
+      - "FreeBSD"
+      - "Shell"
+      - "Awk"
+      - "sed"
+      - "lex"
+      - "yacc"
+  - name: "Database design"
+    level: "Master"
+    keywords:
+      - "NoSQL"
+      - "SQL"
+      - "Hadoop"
+      - "Datomic"
+      - "Oracle"
+      - "PostGres"
+      - "MySQL"
+      - "embedded SQL"
+  - name: "Lisps"
+    level: "Master"
+    keywords:
+      - "Clojure"
+      - "Common Lisp"
+      - "ELisp"
+      - "Scheme"
+  - name: "Haskell"
+    level: "intermediate"
+    keywords:
+      - "XMonad"
+  - name: "Lua"
+    level: "Master"
+  - name: "Cascalog"
+    level: "Master"
+
+  - name; "Clojurescript"
+  - level: "intermediate"
+
+
 languages:
   - language: "English"
     fluency: "Native speaker"
+  - language: "French"
+    fluency: "C1"
 interests:
-  - name: "Wildlife"
+  - name: "Learning natural languages"
+  - name: "Argentine Tango"
     keywords:
-      - "Ferrets"
-      - "Unicorns"
-references:
-  - name: "Erlich Bachman"
-    reference: >
-      It is my pleasure to recommend Richard, his performance working as a consultant for Main St.
-      Company proved that he will be a valuable addition to any company.
+      - "Kinesiology"
+      - "teacher"
+  - name: "Unicycling"
+  - name: "bicycling"
+    keywords:
+      - "fixed gear"
+      - "commuting"
+      - "touring"
+  - name: "bodyweight exercise"
+  - name: "yoga"
+  - name: "Traveling"
+  - name: "3D printing and design"
+  - name: "ArT"
+    keywords:
+      - "Art history"
+      - "sculpting"
+      - "Drawing"
+  - name: "cooking"
+  - name: "gardening"
+    keywords:
+      - "rare plants"
+      - "indigenous plants"
+
+# references :
+#   - name: "Erlich Bachman"
+#     reference: >
+#       It is my pleasure to recommend Richard, his performance working as a consultant for Main St.
+#       Company proved that he will be a valuable addition to any company.
