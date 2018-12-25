@@ -6,9 +6,10 @@ basics:
   label: "Systems Architect, developer, Programmer"
   picture: "/assets/img/me-mtp2.jpg"
   email: "e.a.gebhart@protonmail.com"
-  phone: "(919) 632-1742  - US"
+  phone: "(919) 632-1742 - US,  0491 98 09 72 - BE (33)"
   website: "https://ericgebhart.com"
   summary: >
+    Digital Nomad, US citizen, living half time in France/Europe, with a house in the US.
     Highly creative with an ability to think out of the box and see
     the bigger picture and the far reaching implications of software
     design. A penchant for streamlining of workflow and processes and
@@ -27,10 +28,9 @@ basics:
     - network: "LinkedIn"
       username: "Eric Gebhart"
       url: "https://www.linkedin.com/in/eric-gebhart-24678b12/"
-
-# - network: "Twitter"
-#   username: "RHendricksCEO"
-#   url: ""
+    - network: "Twitter"
+      username: "EricGebhart3"
+      url: ""
 
     # - network: "Short Edition"
     #   username: "Ericag"

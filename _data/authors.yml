@@ -8,9 +8,11 @@ author1:
   # Used at the bottom of each page and at the top of the `about` layout
   # Markdown enabled, can use multiple paragraphs (enabled by `|`)
   about:             |
-    I do lots of stuff.  I should update this.
+    Eric has many interests and skills, many of which he has been doing for 30 years or more,
+    Computer programming, Argentine Tango, learning languages, unicycling, Bodyweight exercise,
+    yoga, bicycling, drawing, sculpting, flute...
+    Finding balance between them all is always challenge.
 
-    Open `_data/authors.yml` to edit this text.
 
   # This photo will be used in the about section
   picture:
