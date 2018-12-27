@@ -21,7 +21,8 @@ So lets get all of this working in Clojure. Its like many other things, its not 
 The graph schema is where it all starts. Using a Union for properties allows for the schema to adapt and change without impacting code, yet still enforcing a consistent shape to the data.  In this example we have a Union called Person Property Value. This is where all properties go in this simple example. Location is the only complex property, it is a struct with several optional values. At the intermediat level here is a structure called person property, This serves to connect an id with a property.  Finally we have a DataUnit Union. This is the Thrift object that we will be storing. Everything in the database is a Data Unit.
 
 
-```
+```java
+
     /* the basic union of properties */
     union PersonPropertyValue {
         1: string first_name;
@@ -64,6 +65,7 @@ Underneath it all this is pretty much all there is to it.
 
 Now we just need to create some thrift objects.  That turns out to be pretty easy.
 
+```clojure
     (def du1-1 (thrift/build DataUnit {:property {:id "123"
                                                     :property {:first_name "Eric"}}}))
 
@@ -74,6 +76,8 @@ Now we just need to create some thrift objects.  That turns out to be pretty ea
                                                     :property { :location {:address "1 Pack Place"
                                                                             :city "Asheville"
                                                                             :state "NC"}}}}))
+                                                                            
+```
 
 
 After a couple of these it becomes clear how this maps directly to the schema. It's also pretty obvious that it would be easy to automate.
@@ -82,35 +86,46 @@ Now that we have some thrift objects, Thrift and pail can work together to seria
 
 Getting the current value of the Data Unit union gives us a Person Property structure which has an id and a personPropertyValue named property.
 
+```clojure
     (tu/current-value du1-1)
     =>#<PersonProperty PersonProperty(id:123, property:<PersonPropertyValue first_name:Eric>)>
+```
 
 We just need to go one level deeper to get to the id or the property. To get the value from a structure we need to give thrift/value a key.
 
+```clojure
     (thrift/value (tu/current-value du1-1) :id)
     => "123"
+```
 
 Asking for the property gives us the PersonPropertyValue union.
 
+```clojure
     (thrift/value (tu/current-value du1-1) :property)
     => #<PersonPropertyValue <PersonPropertyValue first_name:Eric>>
+```
 
 
 To get the value of the PersonPropertyValue union we ask for the current value.
 
+```clojure
     (tu/current-value (thrift/value (tu/current-value du1-1) :property))
     => "Eric"
+```
 
 if we try the exact same code with a location data unit we see that yet another level is needed to get all the key values from the structure.
 
+```clojure
     (tu/current-value (thrift/value (tu/current-value du1-3) :property))
     =>#<Location Location(address:1 Pack Place, city:Asheville, state:NC)>
+```
 
 Now we know enough to wrap these ideas up into functions. One function for the top level structure values like id and property in the PersonProperty
 structure or id1 and id2 in the friendshipedge structure.
 Another function for union values contained in a a secondary union (PersonPropertyValue) like 'name', and finally a special function to extract the
 values from the lowest level structure such as 'city' in the location structure.
 
+```clojure
     (defn property-value [du name]
       "get the named field value from the current structure in the top level union.
        Union -> struct : - value."
@@ -129,16 +144,19 @@ values from the lowest level structure such as 'city' in the location structure.
       (into [(property-value du :id)]
             (map #(thrift/value (property-union-value du :property) %)
                  [:address :city :county :state :country :zip])))
+```
 
 
 Here is how they all work.
 
+```clojure
     (property-value du1-3 :id)
     => "123"
     (property-union-value du1-1 :property)
     => "Eric"
     (locprop du1-3)
     => ["123" "1 Pack Place" "Asheville" nil "NC" nil nil]
+```
 
 <hr/>
 
@@ -146,6 +164,7 @@ Here is how they all work.
 
 Pail turns out to be not all that hard to use. But it does take some setup.  First we need a Pail Structure. This tells pail how to behave. It gives pail the serializer which we get from thrift. The Pail Structure also gives pail our partitioner which tells pail how to partition the data. Here is our Pail Structure.
 
+```clojure
     (ns thrift-pail-cascalog-example.data-unit-pail-structure
     (:require [clj-pail.structure :refer [gen-structure]]
                 [pail-thrift.serializer :as s]
@@ -158,15 +177,19 @@ Pail turns out to be not all that hard to use. But it does take some setup.  Fi
                 :type DataUnit
                 :serializer (s/thrift-serializer DataUnit)
                 :partitioner (p/union-partitioner DataUnit))
+```
 
 The important bits are the type, serializer and partitioner.  For now we are using the Union-partitioner that came with Pail-Thrift. The only other special piece of this is that this file must be precompiled,  So in your project.clj you'll need something like this.
 
+```clojure
     :aot [thrift-pail-cascalog-example.data-unit-pail-structure]
+```
 
 You'll want to do a <strong>'lein clean; lein compile'</strong> anytime you change this.
 
 The partitioner is fairly straightforward as well. It has two primary methods make-partition and validate. Make-partition returns a vector of folder names, validate simply checks the first entry in that same list for validity and returns a vector of <pre><code>[true (rest dirs)]</code></pre> if it's ok. false otherwise.  This partitioner only looks at the top level Union and returns the field id for the current field as the directory name. Validate checks to see if the number given is in the list of field ids.
 
+```clojure
     (defrecord ^{:doc "A pail partitioner for Thrift unions. It requires a type, which must be a subtype
                   of `TUnion`. The partitioner will partition based on the union's set field so that
                   all union values with the same field will be placed in the same partition."}
@@ -192,17 +215,21 @@ The partitioner is fairly straightforward as well. It has two primary methods ma
     class, and not an instance."
     [type]
     (UnionPartitioner. type))
+```
 
 
 Using this pail is pretty simple. First we create a Pail Spec from our DataUnitPailStructure, then we create the pail from the PailSpec.
 
+```clojure
     (def mypail (-> (DataUnitPailStructure.)
                 (pl/spec)
                 (pl/create "example_output"  :fail-on-exists false)))
+```
 
 
 Now we write to it. We've only got seven objects so this will do.
 
+```clojure
     (defn write-them [pail-connection]
     (with-open [writer (.openWrite pail-connection)]
         (doto writer
@@ -215,6 +242,7 @@ Now we write to it. We've only got seven objects so this will do.
             (.writeObject du3))))
 
     (write-them mypail)
+```
 
 If we look in our example_output directory we will see that we have 2 directories.  1 and 2.
 looking at the schema will show that 1 is the field id for property and 2 is the field id for friendship edges.
@@ -237,7 +265,7 @@ We need a partitioner that will not only give back names, but also drill deeper 
 
 Here's our new partitioner, you can see that all we do is look for the name and go one level deeper if the name is 'property' and that 2nd tier structure has a :property field.
 
-<pre><code>
+```clojure
     (defrecord ^{:doc "A 2 level pail partitioner for Thrift unions. It requires a type,
                  which must be a subtype of TUnion. The partitioner will partition
                  based on the union's set field name so that all union values with
@@ -290,14 +318,14 @@ Here's our new partitioner, you can see that all we do is look for the name and 
     (defn union-name-property-partitioner
     [type]
     (UnionNamePropertyPartitioner. type))
-</code></pre>
 
+```
 
 Now all we need to do is change our Pail Structure to point at this new partitioner.
 
-<pre><code>
+```clojure
     :partitioner (p2/union-name-property-partitioner DataUnit)
-</code></pre>
+```
 
 
 Don't forget to recompile.
@@ -305,13 +333,13 @@ Don't forget to recompile.
 
 Reconnect to our pail and write our objects.
 
-<pre><code>
+```clojure
     (def mypail (-> (DataUnitPailStructure.)
                     (pl/spec)
                     (pl/create "example_output"  :fail-on-exists false)))
 
     (write-them mypail)
-</code></pre>
+```
 
 Now let's check our output file tree.
 
@@ -339,10 +367,13 @@ When using Cascalog the first thing you need is a generator.  There are three f
 
 Heres a basic pail tap.
 
+```clojure
     (pcas/pail->tap pail-connection)
+```
 
 The problem with this tap is that it will bring back all the thrift objects it can find without any idea of what is in them. It could be handled but it's very messy and complicated. What we really want to do is leverage the vertical partitioning that is built into our data with Pail.  This turns out to be very easy.  One of the arguments to create a pail tap can be a vector of paths where each path is a vector. That tap then only brings back objects from those paths. Here is a way to create all the taps we need.
 
+```clojure
     (defn first-name-tap [pail-connection]
         (pcas/pail->tap pail-connection :attributes [["property" "first_name"]] ))
 
@@ -354,16 +385,20 @@ The problem with this tap is that it will bring back all the thrift objects it c
 
     (defn friendedge-tap [pail-connection]
         (pcas/pail->tap pail-connection :attributes [["friendshipedge"]] ))
+```
 
 
 Let's try out the first name tap and see what happens.
 
+```clojure
     (??<- [?data] (first-name-tap _ ?data))
     => (\[\#<DataUnit <DataUnit property:PersonProperty(id:123, property:<PersonPropertyValue first_name:Eric>)>>\]
         \[\#<DataUnit <DataUnit property:PersonProperty(id:abc, property:<PersonPropertyValue first_name:Frederick>)>>\])
+```
 
 That worked pretty well but everything is still inside a thrift object which isn't very useful. We need an operator to deconstruct it.  All we need is a defmapfn.  These have been renamed in [Cascalog 2] (https://groups.google.com/forum/#!msg/cascalog-user/F8EkFM7HiE0/c0HVP-zk5OUJ), everything that was def???op is now def???fn.  Additionally these guys are now real functions so we can use them like functions to test them out.  We need two operators, and we can use the functions we created before.
 
+```clojure
     (defmapfn sprop [du]
         "Deconstruct a simple property object that only has an id and one value which
         is a union named 'property'."
@@ -376,18 +411,22 @@ That worked pretty well but everything is still inside a thrift object which isn
     (into [(property-value du :id)]
         (map #(thrift/value (property-union-value du :property) %)
              [:address :city :county :state :country :zip])))
+```
 
 These work as advertised.
 
+```clojure
     (sprop du1-1)
     =>["123" "Eric"]
     (sprop du1-2)
     => ["123" "Gebhart"]
     (locprop du1-3)
     => ["123" "1 Pack Place" "Asheville" nil "NC" nil nil]
+```
 
 Now let's wrap up a full query using our taps and operators in a function.
 
+```clojure
     (defn get-everything [pail-connection]
         (let [fntap (first-name-tap pail-connection)
             lntap (last-name-tap pail-connection)
@@ -399,12 +438,15 @@ Now let's wrap up a full query using our taps and operators in a function.
             (sprop ?fn-data :> ?id ?first-name)
             (sprop ?ln-data :> ?id ?last-name)
             (structprop ?loc-data :> ?id !address !city !county !state !country !zip))))
+```
 
 Here it goes.
 
+```clojure
     (get-everything mypail)
     =>(["Eric" "Gebhart" "1 Pack Place" "Asheville" nil "NC" nil nil]
        ["Frederick" "Gebhart" "1 Wall Street" "Asheville" nil "NC" nil nil])
+```
 
 Now that's cool.
 
