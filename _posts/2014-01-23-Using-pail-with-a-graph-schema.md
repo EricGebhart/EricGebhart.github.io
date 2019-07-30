@@ -27,7 +27,7 @@ in the library on github. Just like the last time,
 [clone my repository](https://github.com/EricGebhart/pail-graph) fire up a REPL and
 follow along!
 
-##Graph Schema
+## Graph Schema
 
 This is the easy part. I'm using the same graph schema
 before, and one that is somewhat similar to what Nathan
@@ -86,7 +86,7 @@ union DataUnit {
 }
 ```
 
-##Creating Thrift objects
+## Creating Thrift objects
 
 This part is just like the other example. We just need to build some DataUnit's with the build function from clj-thrift.
 

@@ -27,7 +27,7 @@ Fressian is not a serializer, but does a really good job at it.
 
 ---
 
-##Look ma! No Schema!
+## Look ma! No Schema!
 
 We don't need a schema for this. Although I did make some simple
 types to make things easier. How you do it is totally up to you. This
@@ -59,7 +59,7 @@ and there are three properties, FirstName, LastName and Location.
   {:id1 id1 :id2 id2})
 ```
 
-###creating some data
+### Creating some data
 The code to create some of these is very straight forward. Since we have
 fressian, there's no need to build any special objects. We just put the
 data together how we want it.
@@ -92,7 +92,7 @@ du1-3
 
 ---
 
-##The Pail Partitioner
+## The Pail Partitioner
 
 The Pail partitioner is also fairly straight forward. The partitioner
 has no problems looking around at these objects, and we've given them
@@ -135,7 +135,7 @@ much to change.
 
 ---
 
-##Create a Pail
+## Create a Pail
 
 Now we need a pail so we can write some data. This is the same as the thrift example.
 
@@ -162,7 +162,7 @@ example_pail
 
 ---
 
-##Cascalog
+## Cascalog
 
 Now let's get some data back out. We can get a basic tap right at PersonProperty and take a look at what we have.
 

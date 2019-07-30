@@ -124,7 +124,7 @@ also be defined separately in the same way that the Location property
 is defined.
 
 
-##Constructors
+## Constructors
 
 In addition to creating the schema, it is also helpful to create
 some constructors that will make creating a Data Unit a simple
@@ -181,7 +181,7 @@ make it easy to create the various parts of a Data Unit.
 ```
 
 ---
-##Creating some Data Units
+## Creating some Data Units
 
 Creating our DataUnits is as straight forward as can be, and what we end up with plain old clojure data.
 
@@ -206,7 +206,7 @@ Creating our DataUnits is as straight forward as can be, and what we end up with
 ```
 
 ---
-##Validation
+## Validation
 All we've done so far is create some basic clojure data maps. Now we
 can validate them with our schema. This is all we need to validate the
 du1-1 data unit. On success we get the original du1-1 as a return.
@@ -223,7 +223,7 @@ anything fails, you won't really know which one it is.
 ```
 
 ---
-##Coercion
+## Coercion
 
 Of all the Data Unit's defined, there is only one that is invalid,
 du1-4 has age as a string rather than an integer. The error message is
@@ -278,7 +278,7 @@ to the database.
 ```
 
 ---
-##Defining a Pail
+## Defining a Pail
 
 Defining a pail is a little bit different now since clj-pail-tap is
 adding some extra functionality over the old Pail Structure definition
@@ -308,7 +308,7 @@ part is not so different than before.
 ```
 
 ---
-####The Partitioner
+#### The Partitioner
 We've already seen people/master-schema and the fressian-serializer is the one we get from pail-fressian. The rest is code we'll need. Pail-Schema provides a fairly generic partitioner, tapmapper and property-path generator. I experimented with type/meta information, and named schemas, all of which seem like they might make things simpler and more flexible but in the end were not that helpful or persistent. 
 
 The easiest thing is still the way that things work with thrift. Look
@@ -331,7 +331,7 @@ p/VerticalPartitioner
 ```
 
 ---
-####The Tap Mapper
+#### The Tap Mapper
 The Tap Mapper code is supposed to take the output of the property
 path generator and return a map of property paths where the compounded
 property name is the key. It is totally up to you how to construct the
@@ -390,7 +390,7 @@ pail-schema-example.example> (.getTapMapper ps)
 ```
 
 ---
-####Tap Maps
+#### Tap Maps
 Part of the core functionality of clj-pail-tap is to also provide easy
 ways to get to the tap maps. These functions will use a pail structure
 or a pail connection, and work with whatever you have set up wether it
@@ -405,7 +405,7 @@ in the Pail structure we can also do things like this.
 ```
 
 ---
-##Using the Pail
+## Using the Pail
 
 Our Pail Structure seems to be working fine. But we haven't written
 anything to the pail yet. As with the previous examples this part is
@@ -437,7 +437,7 @@ example_output
 
 
 ---
-####The simplist Cascalog Query
+#### The simplist Cascalog Query
 This is where it starts to get fun. With thrift, we always had a thrift
 object to deconstruct. With these data objects there is no real need. We
 can look at them and use them as they are. Deconstructing the data for
@@ -451,7 +451,7 @@ a raw query with no deconstruction and still see what we've got.
 
 
 ---
-####partial deconstruction
+#### partial deconstruction
 It could be that what we want back from cascalog is not so deconstructed
 at all. Maybe all we want is to deconstruct it far enough to be joined
 by the query. In this case that means getting two values, id and Person
@@ -481,7 +481,7 @@ downstream.
 ```
 
 ---
-##Getting Pail Taps
+## Getting Pail Taps
 Notice that getting taps is very easy with the tap mapper doing all the
 work underneath. It's also possible to leverage the tap-mapper in other
 ways. We could create a tap that includes all person properties but
@@ -561,7 +561,7 @@ Now we can query for and deconstruct everything. Here's what that looks like.
 ```
 
 <br/>
-##Conclusion
+## Conclusion
 I've been working on various forms of using Pail within Clojure for
 several months now. Using the Fressian Pail with no schema but just
 constructors was really nice, but seemed a bit loose in some ways. Maybe
