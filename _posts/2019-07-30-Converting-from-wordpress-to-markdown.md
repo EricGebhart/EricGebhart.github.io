@@ -24,7 +24,7 @@ _cd_ into the project and run *gen-posts* like this.
 
 `gen-posts -u <username> -d <databasename>`
 
-Or like this:
+Or like this, if you want to extract pages into a different directory:
 
 `gen-posts -u <username> -d <databasename> -q select_pages.sql -w wp_pages -m md_pages`
 
