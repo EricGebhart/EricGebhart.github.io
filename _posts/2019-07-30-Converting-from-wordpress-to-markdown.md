@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Converting from wordpress to markdown"
-description: "A tool to recover pages and post from a wordpress SQLdump into markdown"
+description: "A tool to recover pages and posts from a wordpress SQLdump into markdown"
 date: 2019-07-30
 category: code
 tags: [wordpress, jekyll, markdown, html, awk, sed, shell]
@@ -79,13 +79,13 @@ Of course you can do some queries too.  I'll leave that up to you.
 ## The query to extract the posts.
 
 I searched all over, and there are many different ways to do this.
-There are queries which join with other tables with subqueries so you can extract just the posts by a certain author for instance.  For me I'm the only author here so it didn't matter. The query I ended up with is this. There is probably a better one, but this is the first one that worked so that's where I stopped. The `\G` is important, it makes the post pretty, separates the rows and puts the column names in front of each value.  `title:, date: and Content:`
+There are queries which join with other tables with subqueries so you can extract just the posts by a certain author for instance. In my case I'm the only author here so it didn't matter. The query I ended up with is this. There is probably a better one, but this is the first one that worked so that's where I stopped. The `\G` is important, it makes the post pretty, separates the rows and puts the column names in front of each value.  `title:, date: and Content:`
 
 There are two queries here, one for posts which is the default
 query and one for pages.
 
 In *select-posts.sql*
-```SQL
+```sql
 select post_title as title, post_date as date, post_content as Content 
 from wp_posts 
 where post_type LIKE 'post' and post_status = 'publish' 
@@ -95,8 +95,8 @@ order by post_date DESC\G;
 
 Extracting the pages is nearly the same:
 
-In *select-pages.sql*
-```SQL
+This query is in the file *select-pages.sql*
+```sql
 select post_title as title, post_date as date, post_content as Content 
 from wp_posts 
 where post_type LIKE 'page' and post_status = 'publish' 
@@ -116,7 +116,7 @@ Is a big file _all_posts.txt_ with all the posts in it.
 To take care of that we can run an *awk* script to split them all up and put them in a different directory to keep things organized.
 
 This will make sure the directory is there and then put each post
-in the _wp_posts_ directory with names _wp-post1_, _wp-post2_, etc.
+in the __wp_posts__ directory with names _wp-post1_, _wp-post2_, etc.
 
 The awk script creates a new filename `x` each time it encounters
 a new row which is `*****************Row #************` it then prints each line it gets to that file. If you are new to awk, it matches on a pattern `/*\*\*\*\*\*\.*/` when that happens it assigns `x` a new file name. Every line is printed by default because the print block doesn't have a pattern to match in front of it. So it prints everything to `x` no matter what. Simple.
@@ -153,7 +153,8 @@ have a `>` until the `>`, then get everything until `</a>`. That gives
 us 3 pieces. We put number 3, the link, in '[]' and number 1, the url,
 in '()'. We throw number 2 away.
 
-But we need a lot more than that. A nice feature of *sed* is that
+But we need a lot more than that to convert all the html tags to markdown.
+A nice feature of *sed* is that
 you can just put a list of these commands in a file. For the HTML
 I had this was not too complicated. I edit each post anyway, so
 If I find something I just add it to the _convert.sed_ file and 
@@ -161,10 +162,11 @@ convert the post (for post1) again with
 
 `sed -f convert.sed wp_posts/wp-post1 > Post1.md`
 
-But that's not really a complete solution. Yes the post is in markdown, but jekyll and other static site generators expect a header and a reasonable name. _Post1.md_ is not a good name.  We need something like _2018-07-30-Converting-from-wordpress-to-markdown.md_ 
+I did that for about five minutes because it's not a complete solution. Yes the post is in markdown, but jekyll and other static site generators expect a header and a reasonable name. _Post1.md_ is not a good name.  We need something like _2018-07-30-Converting-from-wordpress-to-markdown.md_ 
 
-We can also use `gen-posts -f wp_posts/wp_post1` but you want 
-to know how this works, yes?
+To get a nicely named file with a nice header we can use this.
+`gen-posts -f wp_posts/wp_post1` 
+But you still want to know how this works, yes?
 
 ## Awk and Sed again.
 
@@ -269,11 +271,11 @@ or this:
 
 `gen-posts -n`
 
-or if they are somewhere else,
+If they are somewhere else.
 
 `gen-posts -n -w somewhere-else`
 
-and you want to put them in another place..
+If you want to put them in another place other than md_posts.
 
 `gen-posts -n -w somewhere-else -m another-place`
 
@@ -285,6 +287,8 @@ If something isn't converted correctly from html to markdown, just
 modify or add to *convert.sed*. Those are really the only things
 you will most likely need to worry about unless your titles have
 `:`s in them.  If you do find things to add, please do a pull request so everyone can enjoy the fruits of your labor.
+
+It might be nice if it would fill in the tags and category as well.  Hmmm. 
 
 
 ## Conclusion
