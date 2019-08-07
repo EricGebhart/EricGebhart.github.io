@@ -6,14 +6,16 @@ basics:
   label: "Systems Architect, developer, Programmer"
   picture: "/assets/img/me-mtp2.jpg"
   email: "e.a.gebhart@protonmail.com"
-  phone: "(919) 632-1742 - US,  0491 98 09 72 - BE (33)"
+  phone: "(919) 632-1742 - US,  06 30 11 58 66 - FR (33)"
   website: "https://ericgebhart.com"
   summary: >
     Digital Nomad, US citizen, living half time in France/Europe, with a house in the US.
-    Highly creative with an ability to think out of the box and see
+    Highly creative with an ability to think out of the box. Good at seeing
     the bigger picture and the far reaching implications of software
     design. A penchant for streamlining of workflow and processes and
     creating the tools which enable them.
+    Loves learning knew technologies and languages, programming or
+    otherwise. Programming elisp and using emacs in vi mode since 1995.
     Happily using Arch Linux and XMonad on my Wacom tablet.
   location:
     address: "13 Meyers Ave."
@@ -51,7 +53,7 @@ work:
     highlights:
       - "Clojure library for better command line parsing."
       - "Clojure library for easy integration between dfs datastores and cascalog."
-      - "System framework for analysing the extinction rate of the Lesser Prairie Chicken."
+      - "System framework (Monte Carlo simulation) for analysing the extinction rate of the Lesser Prairie Chicken."
   - company: "TangoBreath"
     position: "Owner/Teacher"
     website: "https://tangobreath.com"
@@ -76,8 +78,8 @@ work:
         Core-async, error reporting with Timbre.  Cascalog is used in conjunction
         with DFS Datastores,  Fressian and Prismatic Schema for queries and data
         manipulation. Hadoop is used for the backend and Datomic is on the front
-        end. Some customers prefer data in other shapes which we can also share.
-        The projects run on AWS.
+        end. Some customers prefer data in other shapes which we could also create.
+        The projects ran on AWS.
     highlights:
       - "Based loosely on Nathan Mar's 'Lambda Architecture'."
       - "Clojure library to easily clean and transform almost any data into a graph database in hadoop."
@@ -117,7 +119,7 @@ work:
   - company: "Various"
     position: "Consultant"
     website: "https://EricGebhart.com"
-    startDate: "1984-01-01"
+    startDate: "1981-01-01"
     endDate: "1995-10-02"
     summary: >
         Primary roles in these jobs consisted of Systems and Database
@@ -135,7 +137,8 @@ work:
          UI framework which were used to quickly create an expansive trouble ticket
          system for Nortel phone switches."
 
-      - "ABB - Created a cohesive cross platform development
+      - "ABB - Power transmission division.
+        Created a cohesive cross platform development
         environment. Designed and developed an object oriented gui
         framework with Oracle and various GUI tools."
 
@@ -199,7 +202,8 @@ skills:
   - name: "Software architecture and design"
     level: "Master"
     keywords:
-      - "foo"
+      - "functional"
+      - "OOP"
   - name: "Unix/Linux/FreeBSD"
     level: "Master"
     keywords:
@@ -215,6 +219,7 @@ skills:
     level: "Master"
     keywords:
       - "NoSQL"
+      - "Lambda"
       - "SQL"
       - "Hadoop"
       - "Datomic"
@@ -263,11 +268,12 @@ interests:
   - name: "yoga"
   - name: "Traveling"
   - name: "3D printing and design"
-  - name: "ArT"
+  - name: "Art"
     keywords:
       - "Art history"
       - "sculpting"
       - "Drawing"
+      - "Playing Flute"
   - name: "cooking"
   - name: "gardening"
     keywords:
