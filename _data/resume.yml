@@ -19,7 +19,7 @@ basics:
     Happily using Arch Linux and XMonad on my Wacom tablet with an ergo-dox
     keyboard he programmed himself, with both dvorak and bepo layouts among others.
   location:
-    address: "13 Meyers Ave."
+    address: "Nomadic, Domicile: 13 Meyers Ave."
     postalCode: "NC 28806"
     city: "Asheville"
     countryCode: "US"
@@ -100,7 +100,9 @@ work:
         and customization of many different output types, and enabled
         new products to come to life while also creating a more agile
         development cycle which was free of the core system’s 2 year
-        software release schedule.
+        software release schedule. The primary development language
+        at SAS was a homegrown, late binding, OO language modeled after
+        Objective C.
 
         Developed many tools using Python and perhaps too much Elisp,
         including emacs debuggers for Python, Lua and the in house
@@ -261,23 +263,27 @@ interests:
   - name: "Argentine Tango"
     keywords:
       - "Kinesiology"
-      - "teacher"
+      - "Teacher"
   - name: "Unicycling"
-  - name: "bicycling"
+  - name: "Bicycling"
     keywords:
       - "fixed gear"
       - "commuting"
       - "touring"
       - "fred"
-  - name: "bodyweight exercise"
-  - name: "yoga"
+  - name: "Fitness"
+    keywords:
+    - "bodyweight exercise"
+    - "yoga"
+    - "meditation"
   - name: "Traveling"
   - name: "3D printing and design"
+    keywords:
       - "OpenScad"
       - "Scad-clj"
-      - "embedded programming"
-      - "designing/building 3D printers"
-      - "building ergonomic keyboards"
+      - "Embedded programming"
+      - "Designing and building 3D printers"
+      - "Designing and building ergonomic keyboards"
   - name: "Art"
     keywords:
       - "Art history"
@@ -287,8 +293,8 @@ interests:
   - name: "cooking"
   - name: "gardening"
     keywords:
-      - "rare plants"
-      - "indigenous plants"
+      - "Rare plants"
+      - "Indigenous plants"
 
 # references :
 #   - name: "Erlich Bachman"
