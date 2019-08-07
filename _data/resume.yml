@@ -9,14 +9,15 @@ basics:
   phone: "(919) 632-1742 - US,  06 30 11 58 66 - FR (33)"
   website: "https://ericgebhart.com"
   summary: >
-    Digital Nomad, US citizen, living half time in France/Europe, with a house in the US.
+    Digital Nomad, US citizen, living half time in France/Europe.
     Highly creative with an ability to think out of the box. Good at seeing
     the bigger picture and the far reaching implications of software
     design. A penchant for streamlining of workflow and processes and
     creating the tools which enable them.
     Loves learning knew technologies and languages, programming or
     otherwise. Programming elisp and using emacs in vi mode since 1995.
-    Happily using Arch Linux and XMonad on my Wacom tablet.
+    Happily using Arch Linux and XMonad on my Wacom tablet with an ergo-dox
+    keyboard he programmed himself, with both dvorak and bepo layouts among others.
   location:
     address: "13 Meyers Ave."
     postalCode: "NC 28806"
@@ -182,7 +183,7 @@ work:
 publications:
   - name: "Various SAS Papers"
     publisher: "SAS Institute"
-    releaseDate: "2014-10-01"
+    releaseDate: "2012-09-06"
     website: "https://github.com/EricGebhart/SAS-Papers"
     summary: "Various topics covering the Output Delivery System (ODS) in the Base SAS System."
 skills:
@@ -193,6 +194,7 @@ skills:
       - "Hadoop"
       - "datomic"
       - "data transformation"
+      - "clojurescript"
   - name: "C"
     level: "Master"
   - name: "Python"
@@ -219,7 +221,8 @@ skills:
     level: "Master"
     keywords:
       - "NoSQL"
-      - "Lambda"
+      - "Lambda architecture"
+      - "Cascalog"
       - "SQL"
       - "Hadoop"
       - "Datomic"
@@ -234,6 +237,7 @@ skills:
       - "Common Lisp"
       - "ELisp"
       - "Scheme"
+      - "plysp :-)"
   - name: "Haskell"
     level: "intermediate"
     keywords:
@@ -264,10 +268,15 @@ interests:
       - "fixed gear"
       - "commuting"
       - "touring"
+      - "fred"
   - name: "bodyweight exercise"
   - name: "yoga"
   - name: "Traveling"
   - name: "3D printing and design"
+      - "OpenScad / scadclj"
+      - "embedded programming"
+      - "designing/building 3D printers"
+      - "building ergonomic keyboards"
   - name: "Art"
     keywords:
       - "Art history"
