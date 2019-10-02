@@ -435,6 +435,7 @@ example_output
 
 ---
 #### The simplist Cascalog Query
+
 This is where it starts to get fun. With thrift, we always had a thrift
 object to deconstruct. With these data objects there is no real need. We
 can look at them and use them as they are. Deconstructing the data for
@@ -443,12 +444,36 @@ a raw query with no deconstruction and still see what we've got.
 
 ```clojure
 (??<- [?data] ((pail/pail->tap mypail) _ ?data))
--> ([{:person-property {:id "123", :property {:location {:address "1 Pack Place", :city "Asheville", :county nil, :state "NC", :country nil, :zip nil}}}}] [{:person-property {:id "456", :property {:location {:address "1 Wall Street", :city "Asheville", :county nil, :state "NC", :country nil, :zip nil}}}}] [{:person-property {:id "123", :property {:first-name "Eric"}}}] [{:person-property {:id "456", :property {:first-name "Frederick"}}}] [{:person-property {:id "123", :property {:last-name "Gebhart"}}}] [{:person-property {:id "456", :property {:last-name "Gebhart"}}}] [{:person-property {:id "123", :property {:age 50}}}] [{:person-property {:property {:age 40}, :id "123"}}] [{:friendshipedge {:id1 "123", :id2 "456"}}])
+
+-> ([{:person-property {:id "123", 
+                        :property {:location 
+                                   {:address "1 Pack Place", 
+                                    :city "Asheville", 
+                                    :county nil, 
+                                    :state "NC", 
+                                    :country nil, 
+                                    :zip nil}}}}] 
+    [{:person-property {:id "456", 
+                        :property {:location 
+                                   {:address "1 Wall Street", 
+                                   :city "Asheville", 
+                                   :county nil, 
+                                   :state "NC", 
+                                   :country nil, 
+                                   :zip nil}}}}] 
+    [{:person-property {:id "123", :property {:first-name "Eric"}}}] 
+    [{:person-property {:id "456", :property {:first-name "Frederick"}}}] 
+    [{:person-property {:id "123", :property {:last-name "Gebhart"}}}] 
+    [{:person-property {:id "456", :property {:last-name "Gebhart"}}}] 
+    [{:person-property {:id "123", :property {:age 50}}}] 
+    [{:person-property {:property {:age 40}, :id "123"}}] 
+    [{:friendshipedge {:id1 "123", :id2 "456"}}])
 ```
 
-
 ---
+
 #### partial deconstruction
+
 It could be that what we want back from cascalog is not so deconstructed
 at all. Maybe all we want is to deconstruct it far enough to be joined
 by the query. In this case that means getting two values, id and Person
@@ -473,8 +498,19 @@ downstream.
           (pprop ?data :> ?id ?property))))
 
 (loc-prop-query mypail)
-> (["123" [:location {:address "1 Pack Place", :city "Asheville", :county nil, :state "NC", :country nil, :zip nil}]] 
-   ["456" [:location {:address "1 Wall Street", :city "Asheville", :county nil, :state "NC", :country nil, :zip nil}]])
+
+-> (["123" [:location {:address "1 Pack Place", 
+                      :city "Asheville", 
+                      :county nil, 
+                      :state "NC", 
+                      :country nil, 
+                      :zip nil}]] 
+   ["456" [:location {:address "1 Wall Street", 
+                      :city "Asheville", 
+                      :county nil, 
+                      :state "NC", 
+                      :country nil, 
+                      :zip nil}]])
 ```
 
 ---
@@ -509,8 +545,18 @@ last-name, location and age.
 
 
 (personprop-query mypail)
--> (["123" [:location {:address "1 Pack Place", :city "Asheville", :county nil, :state "NC", :country nil, :zip nil}]] 
-    ["456" [:location {:address "1 Wall Street", :city "Asheville", :county nil, :state "NC", :country nil, :zip nil}]] 
+-> (["123" [:location {:address "1 Pack Place", 
+                       :city "Asheville", 
+                       :county nil, 
+                       :state "NC", 
+                       :country nil, 
+                       :zip nil}]] 
+    ["456" [:location {:address "1 Wall Street", 
+                       :city "Asheville", 
+                       :county nil, 
+                       :state "NC", 
+                       :country nil, 
+                       :zip nil}]] 
     ["123" [:first-name "Eric"]] 
     ["456" [:first-name "Frederick"]] 
     ["123" [:last-name "Gebhart"]] 
