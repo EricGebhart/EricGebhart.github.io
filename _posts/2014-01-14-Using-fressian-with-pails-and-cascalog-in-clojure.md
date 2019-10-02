@@ -146,7 +146,7 @@ Now we need a pail so we can write some data. This is the same as the thrift exa
 
 Wow, that was easy. Here's how the pail looks.
 
-<pre>
+```
 example_pail
 ├── PersonProperty
 │   ├── FirstName
@@ -158,7 +158,7 @@ example_pail
 ├── friendshipedge
 │   └── be3242ba-2922-427a-9d72-109b6c5ed9fb.pailfile
 └── pail.meta
-<pre/>
+```
 
 ---
 
