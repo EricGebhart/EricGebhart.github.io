@@ -62,14 +62,14 @@ as a Graph Schema replacement. Instead of just throwing exceptions when data doe
 why your data doesn't fit the schema. In addition to that, with Schema 2.0, Prismatic schema can now do coercion of your data. These two things alone make Prismatic Schema a strong
 competitor to Graph schema. Add in that everything including the schema and the data is native clojure code, and things are really looking good. There are a lot of advantages, and I'm having a hard time finding any disadvantages. Writing code is really simple when apples are just apples.
 
-	*Better validation messages
-	*Coercion
-	*Schema is clojure code
-	*Data is clojure data
+ * Better validation messages
+ * Coercion
+ * Schema is clojure code
+ * Data is clojure data
 
-As with the other examples I've recreated the same Schema here, using <a
-[Prismatic Schema](https://github.com/prismatic/schema" 
-. It defines a Data Unit which is
+As with the other examples I've recreated the same Schema here, using 
+[Prismatic Schema](https://github.com/prismatic/schema". 
+It defines a Data Unit which is
 the thing all database entities are made of. A Data Unit can be a Person
 Property or a Friendship Edge. A Person Property can either first-name,
 last-name, age or location. Location is a map which contains :address,
@@ -128,7 +128,7 @@ is defined.
 
 In addition to creating the schema, it is also helpful to create
 some constructors that will make creating a Data Unit a simple
-task. These constructors are similar to those used in the <a
+task. These constructors are similar to those used in the 
 [Pail-Fressian example.](http://ericgebhart.com/fressian-pail-and-cascalog/)
 In this example I also retained the type
 hints although they provide no real value since they do not persist
@@ -244,15 +244,12 @@ from a query.
 
 From the code: 
 
-<ul>
-<li> Json-coercer-matcher <p>
+* Json-coercer-matcher
 "A matcher that coerces keywords and keyword enums from strings, and longs and doubles
-     from numbers on the JVM (without losing precision)"</p></li>
-<li> String-coercer-matcher <p>
+     from numbers on the JVM (without losing precision)"
+* String-coercer-matcher
 "A matcher that coerces keywords, keyword enums, s/Num and s/Int,
      and long and doubles (JVM only) from strings."
-</p></li>
-</ul>
 
 Prismatic's coercer takes a schema and coercion matcher and returns a
 coercion function. Here are two simple wrappers for using both coercers
@@ -418,7 +415,7 @@ pretty simple.
 
 The pail now has some data and the entire pail looks like this.
 
-<pre>
+```
 ─(16:41:%)── tree example_output
 example_output
 ├── friendshipedge
@@ -433,7 +430,7 @@ example_output
     │   └── 23c58dc8-def8-4613-a11e-8101cddf4432.pailfile
     └── location
         └── 23c58dc8-def8-4613-a11e-8101cddf4432.pailfile
-</pre>
+```
 
 
 ---
@@ -524,6 +521,7 @@ last-name, location and age.
 
 ---
 ## full deconstruction
+
 Of course it's also very easy to deconstruct the data units when we query
 them. There are really only two flavors of person property, Location
 and the other simple properties. The defmap functions for both of them
@@ -560,8 +558,8 @@ Now we can query for and deconstruct everything. Here's what that looks like.
     ["Frederick" "Gebhart" "1 Wall Street" "Asheville" nil "NC" nil nil])
 ```
 
-<br/>
 ## Conclusion
+
 I've been working on various forms of using Pail within Clojure for
 several months now. Using the Fressian Pail with no schema but just
 constructors was really nice, but seemed a bit loose in some ways. Maybe
