@@ -68,7 +68,7 @@ competitor to Graph schema. Add in that everything including the schema and the 
  * Data is clojure data
 
 As with the other examples I've recreated the same Schema here, using 
-[Prismatic Schema](https://github.com/prismatic/schema". 
+[Prismatic Schema](https://github.com/prismatic/schema"). 
 It defines a Data Unit which is
 the thing all database entities are made of. A Data Unit can be a Person
 Property or a Friendship Edge. A Person Property can either first-name,
