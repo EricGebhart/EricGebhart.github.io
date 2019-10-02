@@ -128,7 +128,6 @@ Now we have a list of thrift objects. Opening a pail and writing them is easy.
 Here's what Pail looks like.
 
 <pre>
-└─(17:45:%)── tree example_output                                       ──#(Tue,Jan14)─┘
 example_output
 ├── friendshipedge
 │   ├── 636155fb-7126-4d78-b977-cc90daee62ed.pailfile
