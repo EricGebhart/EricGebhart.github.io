@@ -128,6 +128,7 @@ Now we have a list of thrift objects. Opening a pail and writing them is easy.
 Here's what Pail looks like.
 
 <pre>
+
 example_output
 ├── friendshipedge
 │   ├── 636155fb-7126-4d78-b977-cc90daee62ed.pailfile
@@ -143,6 +144,7 @@ example_output
     └── location
         ├── 636155fb-7126-4d78-b977-cc90daee62ed.pailfile
         └── 8dadaae2-8602-499f-a6f4-339b909712a0.pailfile
+
 <pre/>
 
 That's about it for getting data into a pail. What I skipped was setting
