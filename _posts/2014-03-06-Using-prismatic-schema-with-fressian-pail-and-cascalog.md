@@ -23,7 +23,7 @@ to explore Nathan Mar's Lambda Architecture from clojure. In the
 used Fressian instead of Thrift to serialize clojure data to and from
 a pail. The simplicity of using Fressian with native clojure data types
 was really nice.
-In the last post,<a [Using pail with a graph schema](http://ericgebhart.com/using-pail-with-a-graph-schema/) 
+In the last post, [Using pail with a graph schema](http://ericgebhart.com/using-pail-with-a-graph-schema/) 
 I expanded on the use of graph schema, Thrift and pail by using a tap
 mapping abstraction on top of pail and graph schema which makes it easy
 to create taps from vertically partitioned pails.
@@ -35,7 +35,7 @@ data types, rather than thrift objects, and fressian as a serializer
 instead of thrift. Replacing Graph Schema and Thrift with Prismatic
 Schema and clojure data types simplifies everything and gives a
 few benefits over using thrift objects. In the process of creating
-this example the tap mapping abstraction has found it's way into <a
+this example the tap mapping abstraction has found it's way into
 [clj-pail-tap](https://github.com/EricGebhart/clj-pail-tap) 
 at GitHub, an extension library for
 David Cuddeback's [clj-pail library](https://github.com/dcuddeback/clj-pail)
