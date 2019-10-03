@@ -11,9 +11,8 @@ about using Thrift, Pail and Cascalog. In this post I'll replace thrift
 and graph schema with Fressian and native data types. It turns out that
 Fressian, Pail, and Cascalog go together like peanut butter and jelly. As
 before this is based on David Cuddeback's clj-pail and pail-cascalog
-libraries. Instead of pail-thrift I have a new <a
-[Pail-Fressian library](http://GitHub.com/EricGebhart/Pail-Fressian)
-which handles the details of using Fressian with Pail. <a
+libraries. Instead of pail-thrift I have a new [Pail-Fressian library](http://GitHub.com/EricGebhart/Pail-Fressian)
+which handles the details of using Fressian with Pail. 
 [Pail-Fressian on clojars](https://clojars.org/pail-fressian) 
 All of the code in this post is available in an [example repository]
 (https://github.com/EricGebhart/Pail-Fressian/blob/master/src/example/example.clj)

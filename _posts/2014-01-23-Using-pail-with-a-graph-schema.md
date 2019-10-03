@@ -150,7 +150,7 @@ up a PailStructure which defines partitioning. In Pail-Graph, unlike
 Pail-Thrift, there is the additional work of
 defining a Tap Mapper. This is where I make you read my
 previous posts if you haven't already. I don't want to
-explain Pail Structures and Partitioning again. First is my '<a
+explain Pail Structures and Partitioning again. First is my
 [Thrif-pail-cascalog and clojure post](http://ericgebhart.com/thrift-pail-cascalog-and-clojure/)
 . Second is my
 [Fressian, Pail and Cascalog post](http://ericgebhart.com/fressian-pail-and-cascalog/)
