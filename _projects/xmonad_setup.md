@@ -9,7 +9,7 @@ links:
     url: https://xmonad.org/
   - title: Source
     url: https://github.com/EricGebhart/xmonad-setup
-caption: My Xmonad configuration
+caption: My Xmonad window manager configuration (Haskell)
 description: >
   I am not a strong haskell programmer, but I've been using Xmonad for several years now.
   It is by far the best window manager I have ever used.

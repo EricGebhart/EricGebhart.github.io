@@ -1,6 +1,6 @@
 ---
 layout: project
-title: 'qmk-firmware'
+title: 'qmk-firmware for my keyboard'
 date: 25 Dec 2018
 # image: /assets/icons/qmk_icon_48.png
 screenshot: /assets/icons/qmk_icon_48.png

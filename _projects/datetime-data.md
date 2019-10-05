@@ -9,7 +9,7 @@ links:
 #    url: https://github.com/nathanmarz/dfs-datastores
   - title: Source
     url: https://github.com/EricGebhart/datatime-data
-caption: Clojure library which wraps Joda time.
+caption: Clojure library which wraps Joda time to create normalized date data.
 description: >
      This library grew out of a need to have normalized dates which could be easily queried
      and manipulated.  Dates were coming in many formats from various sources. This library

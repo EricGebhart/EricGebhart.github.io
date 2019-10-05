@@ -7,7 +7,7 @@ screenshot: /assets/img/projects/hy-push-state.svg
 links:
   - title: Source
     url: https://github.com/EricGebhart/flickr-fetcher
-caption: An endpoint to serve most recent images from flickr.
+caption: An endpoint to serve most recent images from flickr. A nice window into how I design.
 description: >
   This is from a code challenge, where the challenge was to design something rather
   than code it.
