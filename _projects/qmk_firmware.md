@@ -11,8 +11,8 @@ links:
   - title: Source
     url: https://github.com/ericgebhart/qmk_firmware
 caption: Quantum Mechanical Keyboard Firmware
-description: >
-  This is the firmware for my Ergo-dox, dactly-8t, verterbi, and xde-75 keyboards.
+description: 
+> This is the firmware for my Ergo-dox, dactly-8t, verterbi, and xde-75 keyboards.
   This is a huge project which supports many keyboards.  The architecture of the project
   is such that anyone can create their own layouts and integrate them into the project with
   a pull request. Personal code should be in folders named after your github account.  
