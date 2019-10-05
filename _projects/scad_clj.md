@@ -13,6 +13,7 @@ caption: An Open Scad DSL in Clojure.
 description: >
   Write Open SCAD code in clojure instead of the 
   [open scad language](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/The_OpenSCAD_Language).
+  This project was created by Mathew Farrell. I have used it extensively and have contributed extensively to the codebase.
 accent_color: '#4fb1ba'
 accent_image:
   background: 'linear-gradient(to bottom,#193747 0%,#233e4c 30%,#3c929e 50%,#d5d5d4 70%,#cdccc8 100%)'
