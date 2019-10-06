@@ -180,7 +180,7 @@ This new key _GUI_ESC_ is a key that you can hold for a _GUI_ key and tap for _E
 
 Already my ergodox was nicer than my kinesis.
 
-So new definition that goes in `users/<you>/<you>.h`
+So that new definition goes in `users/<you>/<you>.h`
 If you need to write some code that goes in `<you>.c`.
 
 _config.h_ is some reasonable system wide defaults, and _rules.mk_ is 
