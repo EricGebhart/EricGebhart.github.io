@@ -10,7 +10,7 @@ tags: [C, ergodox, ergonomics, QMK, keyboard]
 # My keyboard's custom firmware.
 
 I bought my [ergodox-ez](https://ergodox-ez.com) a few years ago because I wanted 
-something easier to carry than my 
+something easier to carry to the cafe than my 
 [kinesis ergo keyboard](https://kinesis-ergo.com/shop/advantage2-dvorak/).
 
 These days I take my ergodox with me everywhere I go. The best thing about it, other than the 
@@ -24,8 +24,13 @@ I ended up learning all of this because I needed a portable keyboard that had a 
 layout as close to my kinesis as I could get it.
 At the time, the [Online keyboard configurator](https://config.qmk.fm/#/1upkeyboards/1up60hse/LAYOUT_60_ansi) didn't work for me. So I did it all manually. I'm still happy I did.
 
+*NOTE:* Ergodox has a [configurator](https://ergodox-ez.com/pages/oryx) now and 
+they are working on auto flashing your keyboard, so no coding would ever be involved 
+in reconfiguring your keyboard. I have not tried it. But it looks cool, it is all
+based on QMK.
+
 The [QMK-firmware](https://qmk.fm) is how the ergodox is programmed. 
-QMK supports many keyboards which makes it a lot of fun if you 
+QMK supports [many keyboards](https://qmk.fm/keyboards/) which makes it a lot of fun if you 
 like trying out different keyboard layouts and sizes. Which I like.
 
 I'm a little bit of an ergonomics nut. I mostly stick with split keyboards with lots of
@@ -120,7 +125,7 @@ more than one keyboard.
 
 There are only two places to worry about, the rest of the code you can ignore for now.
 The good news is that everyone else puts their stuff in the same two places, so you'll be able
-to look around at what everyone else has done.
+to look around at what everyone else has done. 
 
 QMK is structured so there is a place for all your code. it goes into 
 `users/<insert your github account name here>`
@@ -140,6 +145,7 @@ users/ericgebhart
 ```
 
 The layouts go into a specific directory dictated by the hardware keyboard you have.
+Many people still put everything here. I don't recommend doing that, it's a pain. 
 `keyboards/<your keyboard>/keymaps/<github account>/`
 
 The one for my ergodox can be found in
@@ -151,10 +157,12 @@ keyboards/ergodox_ez/keymaps/ericgebhart
 └── readme.md
 ```
 
-I'm currently playing with a viterbi and xd75re keyboards while I'm building a dactyl,
+I'm currently playing with a _viterbi_ and a _xd75re_ while I'm building a dactyl,
 So those will have other directories to go into. Just follow the path to your your keyboard.
 
-By the way, if you want to play and the ergodox isn't your thing, the
+#### A little about hardware
+
+If you want to play and the ergodox isn't your thing, the
 [xd75re](https://kprepublic.com/collections/xd75/products/xd75re-xd75am-xd75-xiudi-60-custom-keyboard-pcbkeyboards) 
 is really nice and was super easy to build, I wish my now ancient ergodox had backlighting. 
 
@@ -163,10 +171,11 @@ Do you want [Cherry Mx Browns](https://www.cherrymx.de/en/mx-original/mx-brown.h
 or do you prefer [Gaterons](https://mechanicalkeyboards.com/shop/index.php?l=product_list&c=77)
 Or [something else](https://mechanicalkeyboards.com/shop/index.php?l=product_list&c=107)
 As well as the profiles of the keycaps, sculpted or flat, DSA, SA? or something else. 
-[pimp your keyboard](https://pimpmykeyboard.com)! Mechanical keys are awesome.
+[pimp your keyboard](https://pimpmykeyboard.com)! The many choices we
+have with a Mechanical keyboard are awesome.
 
 Building a mechanical keyboard is a very personal thing. And even if you didn't build it
-you can still change out keycaps and sometimes even the keyswitches.
+you can still change out keycaps and sometimes even the key switches
 
 ### A small example.
 
@@ -192,7 +201,7 @@ there too.
 
 Another problem for me with the kinesis was the _control_ and _alt_ keys. All the places
 I could put them were hard to reach. I found my solution in someone elses layout.
-They had changed their _space_ be _control_ when held. But with the thumb keys 
+They had changed their _space_ to be _control_ when held. But with the thumb keys 
 I had _space_, _enter_, _backspace_ and _delete_. Voila! 
 I have _Control_ and _Alt_ on both thumbs and on the easiest keys to reach. 
 
@@ -214,13 +223,13 @@ I defined keys in groups, the left and right rows, leaving the keys on the
 outside edges off, that's all the big keys on the ergodox.  
 _dvorak-row-1-left_, _dvorak-row-2-right_, the thumb cluster groups,
 and so forth.  Then for the extra layers I created special groups like _mouse-buttons-left_,
-_mouse-buttons-right_, _vim-arrows_, etc.  These and the thumb keys tend to be
-layout independent.  You'll want them in the same places all the time.
-The same goes for the keys on each end of each row. 
+_mouse-buttons-right_, _vi-arrows_, etc.  The edges and the thumb keys tend to be
+layout independent.  You'll want these keys in the same places all the time.
 _Tab, shift, caps-lock, ctrl-c, ctrl-v, toggle-to-layer_.
 
-Here's the rows for the dvorak layout. These definitions make it much easier when
-it comes time to make the _keymap.c_ file. We'll need to add the keys on each end
+Here's my definitons for the rows for the dvorak layout. These definitions make 
+it much easier when it comes time to make the _keymap.c_ file. We'll need to add 
+the keys on each end
 of the ergodox, all the _big_ keys... And we can reuse the thumbs and bottom
 rows to create new base layers. But these take care of the basic dvorak layout.
 Keeping things nicely aligned is very important to make this readable. If you miss
@@ -231,9 +240,9 @@ a comma, a key, or you have an extra key, it's not going to compile.
 #define ___DVORAK_L2___ KC_SFT_T_A, KC_O,    KC_LT_MDIA_E,   KC_LT_SYMB_U, KC_I
 #define ___DVORAK_L3___ KC_SCLN,    KC_Q,    KC_J,           KC_K,         KC_X
 
-#define ___DVORAK_R1___ KC_F, KC_G,          KC_C,         KC_R,   KC_L
-#define ___DVORAK_R2___ KC_D, KC_LT_SYMB_H,  KC_LT_MDIA_T, KC_N,   KC_SFT_T_S
-#define ___DVORAK_R3___ KC_B, KC_M,          KC_W,         KC_V,   KC_Z
+#define ___DVORAK_R1___ KC_F, KC_G,          KC_C,           KC_R,   KC_L
+#define ___DVORAK_R2___ KC_D, KC_LT_SYMB_H,  KC_LT_MDIA_T,   KC_N,   KC_SFT_T_S
+#define ___DVORAK_R3___ KC_B, KC_M,          KC_W,           KC_V,   KC_Z
 
 #define ___ERGODOX_BOTTOM_LEFT___  LCTL(KC_C),  LCTL(KC_V),  KC_INS,  KC_LEFT, KC_RIGHT
 #define ___ERGODOX_BOTTOM_RIGHT___ KC_UP,  KC_DOWN,  KC_BSLASH,  LCTL(KC_V),  LCTL(KC_C)
@@ -282,7 +291,7 @@ cluster for use in the mouse and symbol layers.
 #define ___ERGODOX_TRANS_THUMBS___              \
   ___, ___,                                     \
     ___,                                        \
-   ___, ___, ___                               \
+   ___, ___, ___                                \
 
 ```
 
@@ -319,10 +328,10 @@ this layer.
                           ),
 ```
 
-In the mouse layer the home row is the directions, mouse on the left hand and
+In the mouse layer the home row is the directions _LDUR_, with the mouse on the left hand and
 arrow keys on the right. The row below the home rows is the scroll wheels on left
 and the 5 mouse buttons on the right. Reversed so button one is always on the index 
-finger. On the left row above home row is all 5 mouse buttons. Having two sets of 
+finger. On the left the row above home row is all 5 mouse buttons. Having two sets of 
 buttons makes it easy to do highlighting and dragging.  The important edge and thumb
 buttons don't change from the layer below.
 
@@ -339,7 +348,7 @@ never use them except by accident out of habit every now and then.
 
 I know, it's complicated and a bit of work. Mine was even worse than normal because I wanted
 Bepo, and Dvorak on Bepo. That was a real pain. But in all it's really not that bad, and 
-now, after all of this, I wouldn't want a keyboard I couldn't program. So for me,
+now, after all of this, I wouldn't want a keyboard I couldn't program. For me,
 it's totally worth it. Now that it's mostly done, It's actually pretty easy even
 though I made it more difficult for myself with all these base layers and Bepo.
 
@@ -405,6 +414,7 @@ There must be something to do.
  * Maybe I should reuse the shift keys for something.
  * Perhaps another symbols layer with a different layout.
  * Maybe symbols on the top row instead of numbers. Like Bepo.
+ * A oneshot layer for commonly typed things. _!!fmt_, hmm. what else.
 
 ### Conclusion
 
