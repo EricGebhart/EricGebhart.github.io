@@ -187,11 +187,12 @@ The Makefile takes care of everything.
 
 ```make
     packages := $(shell ls -d */ | sed 's,/,,')
+    aur-packages := yacreader vivaldi vivaldi-codecs-ffmpeg-extra-bin mu-git jekyll babashka-bin
 
     # groups cannot be installed via dependencies in PKGBUILD
     groups := xorg xorg-apps xorg-fonts alsa xfce4 xfce-goodies
 
-    all: $(packages) $(groups)
+    all: $(packages) $(aur-packages) $(groups)
 
     print-%  : ; @echo $* = $($*)
 
@@ -201,42 +202,48 @@ The Makefile takes care of everything.
             rm -rf */src
             rm -rf */pkg
 
-    .PHONY: $(packages) $(groups)
+    .PHONY: $(packages) $(aur-packages) $(groups)
+
     $(packages):
-            cd $@; makepkg -si --noconfirm;
+            cd $@; makepkg -si --noconfirm; cd -
+
+    $(aur-packages):
+            yay -S --noconfirm $@
 
     $(groups):
             sudo pacman -S --noconfirm $@
 
 
     # not necessary to list them, but it's clearer.
-    necessities:
-    dotfiles:
-    yay:
-    emacs: necessities
+    necessities: yay
+    emacs: necessities natural-language mu-git
     X11: xorg xorg-apps xorg-fonts X11-apps
-    X11-apps: audio
+    X11-apps: audio yacreader vivaldi vivaldi-codecs-ffmpeg-extra-bin
     Xfce: xfce4 xfce-goodies
     audio: alsa
+    devel: jekyll babashka-bin
+    yay:
     Xmonad:
-    devel:
     natural-language:
     mobile-studio-pro:
     tablet:
 
-    base: X11 X11-apps audio necessities dotfiles Xmonad yay
+    base: necessities X11 audio Xmonad
 ```
 
-This is one of the simplest Makefiles you will ever see. We get a list of
+This is a fairly simple Makefile. We get a list of
 all the meta packages with an `ls`.  We create a list of package groups
-manually, there aren't that many.
+manually, there aren't that many. We also have a list of AUR packages.
 
-We have an _all:_ rule to build/install everything.  We have two rules, one for the
-meta packages which does a `makepkg -si` and another rule which runs `pacman` to install
-any groups that are triggered.
+We have an _all:_ rule to build/install everything.  We have three rules, one for the
+meta packages which does a `makepkg -si` and another rule which runs 
+[pacman](https://wiki.archlinux.org/index.php/Pacman)
+to install any groups we come across and a third which uses [yay](http://github.com/jguer/yay)
+to build any packages from the AUR.
 
 At the end, I've listed some of the build targets, but that isn't really necessary unless
-they have dependencies like _X11_ and _Xfce_.  Both of which are meta packages, making
+they have dependencies like _emacs_, _X11_ and _Xfce_. All of which are meta packages with
+dependencies on groups and/or packages from the AUR. Making
 them results in all of their dependecies being installed before they are installed themselves.
 
 That's it. You can build any target with `make <target name>` like `make X11` or
@@ -250,119 +257,79 @@ packages from the AUR. This Makefile is just like the last one, but with a bit m
 to do, although it doesn't need to know much other than how to call make.
 
 ```make
-packages := $(shell cd arch-pkgs; ls -d */ | sed 's,/,,')
-aur-packages := yacreader vivaldi vivaldi-codecs-ffmpeg-extra-bin mu-git
-repos := xmonad-setup emacs-setup dotfiles bc-extensions
-everything := $(packages) $(aur-packages) $(repos) hidpi xmonad-xsession xmonad-log-applet
+    packages := $(shell cd arch-pkgs; ls -d */ | sed 's,/,,')
+    repos := xmonad-setup emacs-setup dotfiles bc-extensions
+    everything := $(packages) $(repos) hidpi xmonad-xsession xmonad-log-applet
 
+    all: $(everything)
 
-all: $(everything)
+    # make print-packages, etc.
+    print-%  : ; @echo $* = $($*)
 
-# make print-packages, etc. - to see what's in a variable.
-print-%  : ; @echo $* = $($*)
+    .PHONY: $(everything)
 
-.PHONY: $(everything)
+    clean:
+            cd arch-pkgs; make clean; \
+            cd xmonad-log-applet; make clean
 
-clean:
-	cd arch-pkgs; make clean; \
-        cd xmonad-log-applet; make clean
+    $(packages):
+            cd arch-pkgs; make $@
 
-$(packages):
-	cd arch-pkgs; make $@
+    $(repos):
+            cd $@; make install
 
-$(aur-packages):
-	yay -S --noconfirm $@
+    hidpi:
+            cd dotfiles; make hidpi
 
-$(repos):
-	cd $@; make install
+    xmonad-xsession:
+            cd xmonad-setup; make xsession
 
-hidpi:
-	cd dotfiles; make hidpi
+    xmonad-log-applet: Xmonad
+            cd xmonad-log-applet; ./autogen.sh && make && sudo make install
 
-xmonad-xsession:
-	cd xmonad-setup; make xsession
+    dotfiles: dotfiles bc-extensions
+    emacs-setup: emacs
+    xmonad-setup: Xmonad xmonad-log-applet
+    mobile-studio-pro: hidpi
 
-xmonad-log-applet: Xmonad
-	cd xmonad-log-applet; ./autogen.sh && make && sudo make install
-
-necessities: yay
-dotfiles: dotfiles bc-extensions
-emacs: necessities emacs-setup natural-language mu-git
-yay:
-X11: X11-apps
-X11-apps: yay yacreader vivaldi vivaldi-codecs-ffmpeg-extra-bin
-Xfce:
-xmonad-setup: Xmonad xmonad-log-applet
-Xmonad:
-devel:
-natural-language:
-mobile-studio-pro: hidpi
-tablet:
-
-base: yay X11 X11-apps necessities emacs dotfiles Xmonad
-account: dotfiles emacs Xmonad
+    base: necessities X11 emacs dotfiles Xmonad
+    account: dotfiles emacs Xmonad
 
 ```
 
-As you can see it is very similar to the meta-packages makefile.
+As you can see it is very similar to the arch-pkgs makefile but simpler.
+Where the arch-pkgs Makefile had to deal with official and unofficial packages
+and package groups, this Makefile only needs to worry about packages and repos.
 We get a list of the target packages by doing
-an `ls` on the arch-pkgs repo.  The AUR packages and the configuration repos are
-listed out.  We now have 3 make rules which handle the meta-packages to
-be installed with [pacman](https://wiki.archlinux.org/index.php/Pacman),
-the AUR packages to be installed with [yay](http://github.com/jguer/yay)
-and the repos to be installed with [make](https://www.gnu.org/software/make/).
-There are additional specific rules
-for _hidpi_, _xsession_, and _xmonad-log-applet_,
-each of which have something specific about their invocation.
+an `ls` on the arch-pkgs repo.  This does mean that we can only build things 
+that are meta-packages and their dependencies listed there.
 
-The beauty of this is that we can track our dependencies and build/install everything
-as needed. Notice that I put _yay_ as a dependency on X11-apps, base and emacs since all 
-of those install packages from the AUR. It wasn't really necessary, since I always
-install _necessities_ but you never know when someone might skip a step.
+The configuration repos are listed out.  We have 2 make rules which handle 
+the meta-packages to and repos.  Plus 3 more for special cases which are 
+represented by hidpi, xmonad-xsession and xmonad-log-applet.
 
-So looking at the _emacs_ rule. We can see it has these dependencies
+All packages are installed with _make <package>_, the Makefile in arch-pkgs
+takes care of dependencies to groups and packages in the AUR so we don't need
+to think about that here. Basically we just use [make](https://www.gnu.org/software/make/).
+The regular git repos are built with _make install_ unless they have explicit rules
+which does something else.
 
-* necessities - [yay](http://github.com/jguer/yay), vi, nano, fonts, silver-searcher...
-* emacs-setup - my git repo of elisp code.
-* natural-language - my meta package with languagetool, hunspell, etc.
-* mu-git - an AUR package for email.
-* emacs - my meta packages for emacs which includes isync.
+There are 3 additional explicit rules for _hidpi_, _xsession_, and _xmonad-log-applet_,
+each of which have something specific about their invocation of make.
 
-So when we run `make emacs` 
-* Necessties depends on _yay_ so my yay package gets installed first.
-  It calls `make yay` on the arch-pkgs Makefile which calls
-  `makepkg -si --noconfirm` in the yay package folder of arch-pkgs. 
-* It installs my necessities meta-package with `make necessities`,
-  which becomes `makepkg -si --noconfirm` in the arch-pkgs Makefile.
-* It runs `make install` in my emacs-setup repo to install my elisp code. 
-* Next is `make natural-language' in my arch-pkgs.
-* Then it does a `yay -S --noconfirm mu-git` to install the _mu-git_ package from the AUR. 
-* Finally it installs the emacs meta package with `make install emacs` which results in
-  `makepkg -si --noconfirm` in my arch-pkgs repo.
+So looking at the _emacs-setup_ rule. All we really need to know is that the emacs
+meta package is going to install everything it needs. If we look in the arch-pkgs 
+Makefile we will see that it installs _yay_, necessities, natural-language, and mu-git.
 
-Perhaps I should rearrange that. No problem. Things like that are simple.
-Maybe this instead.
-
-`emacs-setup: necessities emacs natural-language mu-git`
-
-I think that's much better. Now I need to change the menu from _emacs_ to _emacs-setup_.
-
-I could sprinkle some more dependencies here and there to insure safety in the
-installation order. But mostly I run this thing once.  After that I only reinstall
-my configurations as they change. 
-
-The one problem here is that because we have
+The one problem with both of these Makefiles is that because we have
 no real targets, we have to use the *.PHONY* rule to force make to do things 
 when we ask.  That means it always does them because it can't tell if it's done
 them before or not.  So a little prudence is probably necessary when it comes to
-making rules.  We don't want to install _yay_ 12 times in a row. Although pacman
-might save us some work.
+making rules.  
 
 _Pacman_ and _yay_ take care of all my upgrades (_yay -Syu_), so this is really a 
-one shot thing. I probably don't need all the dependencies I have here. I always 
-install _necessities_ first so there really isn't a big danger of it going missing 
-when it's needed. _yay_ is a part of the necessities rule so there's not much danger 
-there either.  
+one shot thing that happens when I create a new system. Although I have noticed that
+I have been updating and rerunning the installs as I add new things. 
 
 ### install-packages
 
