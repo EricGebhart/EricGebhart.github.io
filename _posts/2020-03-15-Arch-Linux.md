@@ -116,9 +116,15 @@ but the rest was not very elegant.
 
 After lots of experimenting and 2 or 3 different implementations, I decided that
 my git repository of meta packages and a Makefile was the best and simplest solution for me.
-There is absolutely no need to create an Arch Linux package repo of any sort. PKGBUILDS
-are lightweight and the process of building/installing them is easier than turning them
-into a repository that I have to put somewhere.
+
+As I worked on the Makefiles in my configuration repositories I had realized I should
+have Makefiles everywhere. After all, this project had turned into two shell scripts
+with some submodules which were all other git repos. Each should stand on it's own.
+
+I also realized that there is absolutely no need to create an Arch Linux package repo 
+of any sort. [PKGBUILDs](https://wiki.archlinux.org/index.php/PKGBUILD)/meta-packages 
+are lightweight and the process of building/installing 
+them is easier than turning them into a repository that I have to put somewhere.
 
 I decided that I should just install the package groups I wanted directly
 and let my meta packages list their dependencies for individual official packages.
@@ -126,22 +132,20 @@ All that is needed for that is to run pacman for the groups and `makepkg -si` fo
 meta package and voila, all my official packages are installed.
 
 But then I also had packages from the AUR, my personal configuration repositories and
-the _xmonad-log-applet_ which needed an _autoconfig, make and make install._
+the _xmonad-log-applet_ which is a good example of an old fashioned C project which
+needs a config, make and make install.
 
-And there were all the intertwined dependencies between them all.
+And then there were all the intertwined dependencies between them all.
 
 ## Makefiles are genius.
-
-As I worked on the Makefiles in my configuration repositories I realized I should
-have Makefiles everywhere. After all, this project had turned into two shell scripts
-with some submodules which were all other git repos. Each should stand on it's own.
 
 I made a Makefile to build/install my meta packages in
 [my arch-pkgs repo](http://github.com/ericgebhart/arch-pkgs),
 and then I made a Makefile for the top level.
 The package install script became nothing more than a menu that ran make.
 The Makefiles are as simple as can be and track all the dependencies almost like magic.
-It is, afterall, what _make_ was intended to do. Use the right tool and things become simple.
+It is, afterall, what _make_ was intended to do. _Make_ tracks dependencies and does things
+to keep everyone up to date when stuff changes. Use the right tool and things become simple.
 
 The install-packages script became a somewhat pretty face for the Makefile,
 [dialog](http://linuxcommand.org/lc3_adv_dialog.php) is many
@@ -157,6 +161,7 @@ it really needs other than the meta data at the top is a list of packages it dep
 
 Here's my Xmonad meta package.
 
+```shell
     # Maintainer: Eric Gebhart <e.a.gebhart@protonmail.com>
     pkgname=Xmonad-setup
     pkgver=1
@@ -173,6 +178,7 @@ Here's my Xmonad meta package.
         dmenu dzen2 network-manager-applet xfce4-panel)
 
     rootdir=$PWD
+```
 
 Building a meta-package with `makepkg -si` results in the installation of all those dependencies.
 So this [PKGBUILD] (https://wiki.archlinux.org/index.php/PKGBUILD)
@@ -183,11 +189,14 @@ But remember, I have some package groups I'd like to install from the official r
 putting those in a meta package's dependency list doesn't work unless I want to list every
 single package in the group.  I'd rather let the maintainers of the groups do that.
 
-The Makefile takes care of everything.
+The Makefile takes care of everything. It knows how to make/install my meta packages and it knows
+how to install package groups directly. It also knows how to install unofficial packages from
+the AUR. It knows how to connect all of them through dependencies.
 
 ```make
     packages := $(shell ls -d */ | sed 's,/,,')
-    aur-packages := yacreader vivaldi vivaldi-codecs-ffmpeg-extra-bin mu-git jekyll babashka-bin
+    aur-packages := yacreader vivaldi vivaldi-codecs-ffmpeg-extra-bin mu-git \
+        jekyll babashka-bin slack-desktop
 
     # groups cannot be installed via dependencies in PKGBUILD
     groups := xorg xorg-apps xorg-fonts alsa xfce4 xfce-goodies
@@ -205,20 +214,20 @@ The Makefile takes care of everything.
     .PHONY: $(packages) $(aur-packages) $(groups)
 
     $(packages):
-            cd $@; makepkg -si --noconfirm; cd -
+            cd $@; makepkg -si --noconfirm --needed; cd -
 
     $(aur-packages):
-            yay -S --noconfirm $@
+            yay -S --noconfirm  --needed $@
 
     $(groups):
-            sudo pacman -S --noconfirm $@
+            sudo pacman -S --noconfirm --needed $@
 
 
     # not necessary to list them, but it's clearer.
     necessities: yay
     emacs: necessities natural-language mu-git
     X11: xorg xorg-apps xorg-fonts X11-apps
-    X11-apps: audio yacreader vivaldi vivaldi-codecs-ffmpeg-extra-bin
+    X11-apps: audio yacreader vivaldi vivaldi-codecs-ffmpeg-extra-bin slack-desktop
     Xfce: xfce4 xfce-goodies
     audio: alsa
     devel: jekyll babashka-bin
@@ -247,14 +256,16 @@ dependencies on groups and/or packages from the AUR. Making
 them results in all of their dependecies being installed before they are installed themselves.
 
 That's it. You can build any target with `make <target name>` like `make X11` or
-`make xorg`.  If there are dependencies those get built too.
+`make xorg`.  If there are dependencies those get built too. This is excellent,
+all types of Arch-Linux packages are managed in one place and it's all very succinct and
+clear.
 
 # Making everything together.
 
 At this point all the submodule repos have working Makefiles. Now there needs to
-be a Makefile for the entire setup with dependencies on configuration repos, and
-packages from the AUR. This Makefile is just like the last one, but with a bit more
-to do, although it doesn't need to know much other than how to call make.
+be a Makefile for the entire setup with dependencies between my configuration repos, and
+the various things the arch-pkgs Makefile knows how to install. This Makefile is just 
+like the last one, with less to do. It doesn't need to know much other than how to call make.
 
 ```make
     packages := $(shell cd arch-pkgs; ls -d */ | sed 's,/,,')
@@ -269,23 +280,26 @@ to do, although it doesn't need to know much other than how to call make.
     .PHONY: $(everything)
 
     clean:
-            cd arch-pkgs; make clean; \
-            cd xmonad-log-applet; make clean
+            $(MAKE) -C arch-pkgs clean
+            $(MAKE) -C xmonad-log-applet clean
 
     $(packages):
-            cd arch-pkgs; make $@
+	$(MAKE) -C arch-pkgs $@
 
     $(repos):
-            cd $@; make install
+            $(MAKE) -C $@ install
 
     hidpi:
-            cd dotfiles; make hidpi
+            $(MAKE) -C dotfiles hidpi
 
     xmonad-xsession:
-            cd xmonad-setup; make xsession
+            $(MAKE) -C xmonad-setup xsession
 
+    # the default is to build for xfce.
     xmonad-log-applet: Xmonad
-            cd xmonad-log-applet; ./autogen.sh && make && sudo make install
+            cd $@; ./autogen.sh
+            $(MAKE) -C $@
+            $(MAKE) -C $@ install
 
     dotfiles: dotfiles bc-extensions
     emacs-setup: emacs
@@ -295,41 +309,70 @@ to do, although it doesn't need to know much other than how to call make.
     base: necessities X11 emacs dotfiles Xmonad
     account: dotfiles emacs Xmonad
 
+    git-sub-update:
+            git submodule update --recursive --remote
 ```
 
-As you can see it is very similar to the arch-pkgs makefile but simpler.
+As you can see it is very similar to the arch-pkgs Makefile but simpler.
 Where the arch-pkgs Makefile had to deal with official and unofficial packages
 and package groups, this Makefile only needs to worry about packages and repos.
 We get a list of the target packages by doing
 an `ls` on the arch-pkgs repo.  This does mean that we can only build things 
-that are meta-packages and their dependencies listed there.
+that are meta-packages and their dependencies which are defined in the
+Makefile there. We could do more here, but it's not really necessary.
 
-The configuration repos are listed out.  We have 2 make rules which handle 
-the meta-packages to and repos.  Plus 3 more for special cases which are 
+The configuration repos are listed out.  We have 2 make rules one for installing
+packages and and one for git repos.  Plus 3 more for special cases which are 
 represented by hidpi, xmonad-xsession and xmonad-log-applet.
 
 All packages are installed with _make <package>_, the Makefile in arch-pkgs
 takes care of dependencies to groups and packages in the AUR so we don't need
-to think about that here. Basically we just use [make](https://www.gnu.org/software/make/).
-The regular git repos are built with _make install_ unless they have explicit rules
-which does something else.
+to think about that here. We just use [make](https://www.gnu.org/software/make/)
+for everything. The regular git repos are built with _make install_ unless they 
+have explicit rules which do something else, like _hi-dpi_.
 
 There are 3 additional explicit rules for _hidpi_, _xsession_, and _xmonad-log-applet_,
 each of which have something specific about their invocation of make.
 
 So looking at the _emacs-setup_ rule. All we really need to know is that the emacs
-meta package is going to install everything it needs. If we look in the arch-pkgs 
-Makefile we will see that it installs _yay_, necessities, natural-language, and mu-git.
+package is going to install everything it needs before it installs itself. 
+If we look in the arch-pkgs Makefile we can see that the emacs rule installs 
+_necessities, yay, natural-language, and mu-git_.
+
+```make
+    necessities: yay
+    emacs: necessities natural-language mu-git
+```
+
+If we really need to know every package we just need to look at the package builds, to
+see the details we probably don't care about until something is missing or a new thing
+comes along.
+
+`grep depends */PKGBUILD`
+
+```shell
+    emacs/PKGBUILD:depends=(emacs isync)
+    natural-language/PKGBUILD:depends=(anki languagetool hunspell hunspell-fr hunspell-en_US hunspell-es_any )
+    necessities/PKGBUILD:depends=(sudo git networkmanager tree efibootmgr efivar)
+    necessities/PKGBUILD:depends+=(vi neovim nano emacs)
+    necessities/PKGBUILD:depends+=(bc htop curl wget openssh zip unzip gzip the_silver_searcher)
+    necessities/PKGBUILD:depends+=(ttf-ubuntu-font-family adobe-source-code-pro-fonts)
+    necessities/PKGBUILD:depends+=(lsof bind-tools mtr socat htop iotop openbsd-netcat) 
+    necessities/PKGBUILD:depends+=(strace tcpdump whois iftop dstat)
+    necessities/PKGBUILD:depends+=(zsh zsh-completions fish)
+    necessities/PKGBUILD:depends+=(exfat-utils dosfstools f2fs-tools)
+```
 
 The one problem with both of these Makefiles is that because we have
 no real targets, we have to use the *.PHONY* rule to force make to do things 
 when we ask.  That means it always does them because it can't tell if it's done
 them before or not.  So a little prudence is probably necessary when it comes to
-making rules.  
+making rules. That being said, pacman and yay both do an admirable job of not
+doing unecessary things with the _--needed_ option.
 
 _Pacman_ and _yay_ take care of all my upgrades (_yay -Syu_), so this is really a 
 one shot thing that happens when I create a new system. Although I have noticed that
-I have been updating and rerunning the installs as I add new things. 
+I have been updating and rerunning the installs with make as I add new things. 
 
 ### install-packages
 
@@ -356,8 +399,8 @@ I don't have to remember to start and enable the Network manager daemon before I
 It's not a big deal to type `sudo systemctl --now enable NetworkManager`.
 But I always seem to forget the first and only time I need to do it.
 
-Now I don't have to remember so much. I just have to start by following
-[the installation guide](https://wiki.archlinux.org/index.php/Installation_guide)
+Now I don't have to remember so much everything is in the code. I just have to 
+start by following [the installation guide](https://wiki.archlinux.org/index.php/Installation_guide)
 . Once I have internet on my Arch Linux Live USB boot I can do
 
 ```shell
@@ -374,15 +417,19 @@ you are doing.
 
 Ok then, go to [the installation guide](https://wiki.archlinux.org/index.php/Installation_guide)
 and follow all the steps. You can use _install-packages_ later once you've got your 
-system running.
+system running. You'll probably have to install some things manually to get it working 
+if you didn't do the same `pacstrap` that I have in my script. But that's the learning 
+process isn't it.
 
 ## But wait there's more
 
-The cool trick after all this basic stuff is that the install also
-does a `git clone`  of my Arch-Setup repo, and runs _nmtui_ and
-_install-packages_ automatically upon the first login after reboot.
-All I have to do is check off the boxes I want and wait. logout, login, et voila, my
-system, my way, ready to go.
+The cool trick after all this was connecting the _install-arch_ 
+script with the _install-packages_ script. 
+At the end of the basic installation _install-arch_ does a `git clone` 
+of my Arch-Setup repo into my new account and sets _.zlogin_ to automatically 
+run _nmtui_ followed by _install-packages_ upon the 
+first login after reboot. All I have to do is check off the boxes I want and wait. 
+logout, login, et voila, my system, my way, ready to go.
 
 ## Make it yours.
 
