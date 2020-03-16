@@ -214,7 +214,7 @@ the AUR. It knows how to connect all of them through dependencies.
     .PHONY: $(packages) $(aur-packages) $(groups)
 
     $(packages):
-            cd $@; makepkg -si --noconfirm --needed; cd -
+            cd $@; makepkg -si --noconfirm --needed
 
     $(aur-packages):
             yay -S --noconfirm  --needed $@
