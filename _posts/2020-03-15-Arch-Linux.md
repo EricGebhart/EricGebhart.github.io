@@ -284,7 +284,7 @@ like the last one, with less to do. It doesn't need to know much other than how 
             $(MAKE) -C xmonad-log-applet clean
 
     $(packages):
-	$(MAKE) -C arch-pkgs $@
+            $(MAKE) -C arch-pkgs $@
 
     $(repos):
             $(MAKE) -C $@ install
