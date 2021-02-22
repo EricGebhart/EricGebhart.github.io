@@ -16,14 +16,14 @@ In addition, Clojure now has Clojure.spec which would be
 a much nicer way to do this._
  
 
-In the [first post](http://ericgebhart.com/thrift-pail-cascalog-and-clojure/) I
+In the [first post](https://ericgebhart.com/thrift-pail-cascalog-and-clojure/) I
 wrote about using Thrift, Pail and Cascalog. My initial goals were
 to explore Nathan Mar's Lambda Architecture from clojure. In the
-[second post](http://ericgebhart.com/fressian-pail-and-cascalog/) I
+[second post](https://ericgebhart.com/fressian-pail-and-cascalog/) I
 used Fressian instead of Thrift to serialize clojure data to and from
 a pail. The simplicity of using Fressian with native clojure data types
 was really nice.
-In the last post, [Using pail with a graph schema](http://ericgebhart.com/using-pail-with-a-graph-schema/) 
+In the last post, [Using pail with a graph schema](https://ericgebhart.com/using-pail-with-a-graph-schema/) 
 I expanded on the use of graph schema, Thrift and pail by using a tap
 mapping abstraction on top of pail and graph schema which makes it easy
 to create taps from vertically partitioned pails.
@@ -40,7 +40,7 @@ this example the tap mapping abstraction has found it's way into
 at GitHub, an extension library for
 David Cuddeback's [clj-pail library](https://github.com/dcuddeback/clj-pail)
 The end result is
-[The Pail-Schema library](http://GitHub.com/EricGebhart/Pail-schema"
+[The Pail-Schema library](https://GitHub.com/EricGebhart/Pail-schema"
 which is much
 simpler than the thrift based libraries. For the most part pail-schema
 simply combines [clj-pail-tap](https://github.com/EricGebhart/clj-pail-tap"
@@ -129,7 +129,7 @@ is defined.
 In addition to creating the schema, it is also helpful to create
 some constructors that will make creating a Data Unit a simple
 task. These constructors are similar to those used in the 
-[Pail-Fressian example.](http://ericgebhart.com/fressian-pail-and-cascalog/)
+[Pail-Fressian example.](https://ericgebhart.com/fressian-pail-and-cascalog/)
 In this example I also retained the type
 hints although they provide no real value since they do not persist
 through coercion or when read back from a pail.

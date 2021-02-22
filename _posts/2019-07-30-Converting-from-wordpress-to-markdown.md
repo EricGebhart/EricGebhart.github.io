@@ -18,7 +18,7 @@ I found several articles on how to extract and convert my pages and posts into m
 ## For mavericks. Just tell me how!
 
 If you know what you are doing or you just don't want the details,
-Get your *sqldump* loaded up and then go clone my [wp-md repo](http://github.com/ericgebhart/wp-md) 
+Get your *sqldump* loaded up and then go clone my [wp-md repo](https://github.com/ericgebhart/wp-md) 
 
 _cd_ into the project and run *gen-posts* like this.
 
@@ -137,11 +137,11 @@ command like this would replace all the `<H1>` tags with `# `.
 A more interesting pattern is the one to convert urls.
 
 My urls looked something like this.
-`<a href="http://some/url/somewhere" target="_blank" title="sometitle">The Link</a>`
+`<a href="https://some/url/somewhere" target="_blank" title="sometitle">The Link</a>`
 
 What markdown wants is this:
 
-`[The Link](http://some/url/somewhere)`
+`[The Link](https://some/url/somewhere)`
 
 This is the sed command to do that.
 

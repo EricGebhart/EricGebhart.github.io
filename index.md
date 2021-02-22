@@ -6,7 +6,7 @@ hide_description: true
 
 ![EricGebhart](assets/img/Cursive1.png)
 
-## Under construction !!!
+## Welcome !!!
 
 Restoration of older articles in progress.
 

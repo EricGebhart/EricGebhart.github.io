@@ -7,18 +7,18 @@ category: clojure
 tags: [Graph Schema, Pail, Cascalog, Clojure, Big data]
 ---
 
-In a [previous post](href="http://ericgebhart.com/thrift-pail-cascalog-and-clojure/)
+In a [previous post](href="https://ericgebhart.com/thrift-pail-cascalog-and-clojure/)
 I wrote about using Thrift, Pail and Cascalog. In this post I'll expand
 on that, or rather simplify that example with an extension library,
 Pail-Graph. More specifically this is about using Pail with a Graph
 Schema, which is a little bit more specialized than just using thrift and
 Pail. The use of Graph Schema and the likeness of the example Graph Schema
-comes from [Nathan Marz' Book on Big Data](http://manning.com/marz/). Like
+comes from [Nathan Marz' Book on Big Data](https://manning.com/marz/). Like
 everything else I've done lately this is all based on David
 Cuddeback's clj-pail, clj-thrift, pail-thrift and pail-cascalog
 [libraries](https://github.com/dcuddeback/clj-pail). Pail-graph
 wraps and extends each of the libraries. [The Pail-Graph
-library](http://GitHub.com/EricGebhart/Pail-graph) mostly
+library](https://GitHub.com/EricGebhart/Pail-graph) mostly
 simplifies using a graph-schema with pail and Cascalog. Pail-Graph
 is available on [Clojars](https://clojars.org/pail-graph). All
 of the code in this post is available in the [pail-graph
@@ -31,9 +31,9 @@ follow along!
 
 This is the easy part. I'm using the same graph schema
 before, and one that is somewhat similar to what Nathan
-Marz describes in his [Big Data book](http://manning.com/marz/). 
+Marz describes in his [Big Data book](https://manning.com/marz/). 
 You may also want to read this 
-[post](http://nathanmarz.com/blog/thrift-graphs-strong-flexible-schemas-on-hadoop.html)
+[post](https://nathanmarz.com/blog/thrift-graphs-strong-flexible-schemas-on-hadoop.html)
 about Graph Schema and thrift. The gist
 of this schema is that there is a single Data Unit that is the entire
 database. The Data Unit is a Union of possible values, one of which is a
@@ -151,9 +151,9 @@ Pail-Thrift, there is the additional work of
 defining a Tap Mapper. This is where I make you read my
 previous posts if you haven't already. I don't want to
 explain Pail Structures and Partitioning again. First is my
-[Thrif-pail-cascalog and clojure post](http://ericgebhart.com/thrift-pail-cascalog-and-clojure/)
+[Thrif-pail-cascalog and clojure post](https://ericgebhart.com/thrift-pail-cascalog-and-clojure/)
 . Second is my
-[Fressian, Pail and Cascalog post](http://ericgebhart.com/fressian-pail-and-cascalog/)
+[Fressian, Pail and Cascalog post](https://ericgebhart.com/fressian-pail-and-cascalog/)
 You'll understand and appreciate all of this that much more
 if you read them.
 
@@ -284,7 +284,7 @@ Now we have a Cascalog function that can deconstruct any structure that
 might come along in the PersonPropertyValue union. Using all of this
 together is very easy and nice
 compared to the version in the 
-[Thrift, Pail, Cascalog and Clojure post](http://ericgebhart.com/thrift-pail-cascalog-and-clojure/)
+[Thrift, Pail, Cascalog and Clojure post](https://ericgebhart.com/thrift-pail-cascalog-and-clojure/)
 . Compared to that example, getting
 taps using operators to extract the data values is much easier here
 with Pail-Graph.

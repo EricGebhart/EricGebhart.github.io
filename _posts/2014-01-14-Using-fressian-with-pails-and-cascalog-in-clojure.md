@@ -6,12 +6,12 @@ Date: 2014-01-14 20:58:33
 category: clojure
 tags: [Fressian, Pail, Cascalog, Clojure, Big data]
 ---
-In my [Previous post](http://ericgebhart.com/thrift-pail-cascalog-and-clojure/) I wrote
+In my [Previous post](https://ericgebhart.com/thrift-pail-cascalog-and-clojure/) I wrote
 about using Thrift, Pail and Cascalog. In this post I'll replace thrift
 and graph schema with Fressian and native data types. It turns out that
 Fressian, Pail, and Cascalog go together like peanut butter and jelly. As
 before this is based on David Cuddeback's clj-pail and pail-cascalog
-libraries. Instead of pail-thrift I have a new [Pail-Fressian library](http://GitHub.com/EricGebhart/Pail-Fressian)
+libraries. Instead of pail-thrift I have a new [Pail-Fressian library](https://GitHub.com/EricGebhart/Pail-Fressian)
 which handles the details of using Fressian with Pail. 
 [Pail-Fressian on clojars](https://clojars.org/pail-fressian) 
 All of the code in this post is available in an [example repository]
@@ -21,7 +21,7 @@ Clone my repository, fire up a REPL and follow along!
 Leaving out thrift greatly simplifies everything.In fact, if you haven't
 read my previous post</a>, you should go do that so you can fully appreciate the simplicity
 of using Fressian instead of Thrift. You can learn more about Fressian
-by watching [Stuart Halloway's presentation on Fressian.](http://www.youtube.com/watch?v=JArZqMqsaB0)
+by watching [Stuart Halloway's presentation on Fressian.](https://www.youtube.com/watch?v=JArZqMqsaB0)
 Fressian is not a serializer, but does a really good job at it.
 
 ---

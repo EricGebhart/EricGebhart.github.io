@@ -57,7 +57,7 @@ complex, and it didn't really solve my problems.
 ## An install script
 
 I spent a fair amount of time going down various rabbit holes while wondering if I
-should make a repo of my own from [the meta packages I had just created](http://github.com/ericgebhart/arch-pkgs).
+should make a repo of my own from [the meta packages I had just created](https://github.com/ericgebhart/arch-pkgs).
 So I experimented with package groups and building packages from the AUR. I learned a lot.
 
 Meanwhile I was doing repeated installs and experimenting with various kernel options
@@ -89,7 +89,7 @@ The key problems I had were these:
 I wanted something that would install what I needed, without me needing to maintain what
 packages were actually in the package groups I wanted. I wanted something that could
 install official packages or packages from AUR. I don't have many AUR packages, but my
-web browser [vivaldi](http://vivaldi.com) is one of them and it needs an _ffmpeg_ package
+web browser [vivaldi](https://vivaldi.com) is one of them and it needs an _ffmpeg_ package
 to be installed after vivaldi is installed.
 
 My personal repositories for dotfiles, emacs, and xmonad were intertwined and
@@ -106,13 +106,13 @@ were getting complicated.  My emacs setup needed _emacs, isync, languagetool and
 the official package repository and
 [mu-git with mu4e](https://www.djcbsoftware.nl/code/mu/mu4e.html)
 from the AUR.  Then it needed to install my personal
-[emacs-setup](http://github.com/ericgebhart/emacs-setup) repository in git.
+[emacs-setup](https://github.com/ericgebhart/emacs-setup) repository in git.
 
 My script had a nice checklist menu via 
-[dialog](http://linuxcommand.org/lc3_adv_dialog.php), 
+[dialog](https://linuxcommand.org/lc3_adv_dialog.php), 
 but the rest was not very elegant.
 
-### makepkg, Pacman, [yay](http://github.com/jguer/yay) [groups](https://www.archlinux.org/groups/) and dependencies.
+### makepkg, Pacman, [yay](https://github.com/jguer/yay) [groups](https://www.archlinux.org/groups/) and dependencies.
 
 After lots of experimenting and 2 or 3 different implementations, I decided that
 my git repository of meta packages and a Makefile was the best and simplest solution for me.
@@ -140,7 +140,7 @@ And then there were all the intertwined dependencies between them all.
 ## Makefiles are genius.
 
 I made a Makefile to build/install my meta packages in
-[my arch-pkgs repo](http://github.com/ericgebhart/arch-pkgs),
+[my arch-pkgs repo](https://github.com/ericgebhart/arch-pkgs),
 and then I made a Makefile for the top level.
 The package install script became nothing more than a menu that ran make.
 The Makefiles are as simple as can be and track all the dependencies almost like magic.
@@ -148,7 +148,7 @@ It is, afterall, what _make_ was intended to do. _Make_ tracks dependencies and 
 to keep everyone up to date when stuff changes. Use the right tool and things become simple.
 
 The install-packages script became a somewhat pretty face for the Makefile,
-[dialog](http://linuxcommand.org/lc3_adv_dialog.php) is many
+[dialog](https://linuxcommand.org/lc3_adv_dialog.php) is many
 things but pretty isn't really one of them.
 Suddenly my solution was elegant and maintainable.
 
@@ -247,7 +247,7 @@ manually, there aren't that many. We also have a list of AUR packages.
 We have an _all:_ rule to build/install everything.  We have three rules, one for the
 meta packages which does a `makepkg -si` and another rule which runs 
 [pacman](https://wiki.archlinux.org/index.php/Pacman)
-to install any groups we come across and a third which uses [yay](http://github.com/jguer/yay)
+to install any groups we come across and a third which uses [yay](https://github.com/jguer/yay)
 to build any packages from the AUR.
 
 At the end, I've listed some of the build targets, but that isn't really necessary unless
@@ -382,7 +382,7 @@ unecessary, but it's nice, so I kept it.
 # In conclusion
 
 This has been a fun journey and I can already tell that I will be using this
-[Arch-Setup](http://github.com/ericgebhart/Arch-Setup) project for a long time.
+[Arch-Setup](https://github.com/ericgebhart/Arch-Setup) project for a long time.
 
 I have a Makefile which handles all my software installation dependencies and it's
 all very simple. Adding new things to my system is a breeze wether they are packages,
