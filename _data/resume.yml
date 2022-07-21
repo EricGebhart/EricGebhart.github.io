@@ -16,7 +16,7 @@ basics:
     creating the tools which enable them.
     Loves learning knew technologies and languages, programming or
     otherwise. Programming elisp and using emacs in vi mode since 1995.
-    Happily using Arch Linux and XMonad on my Wacom tablet with an ergo-dox
+    Happily using Arch Linux and XMonad on my Wacom tablet with a custom
     keyboard he programmed himself, with both dvorak and bepo layouts among others.
   location:
     address: "Nomadic, Domicile: 13 Meyers Ave."
@@ -52,6 +52,7 @@ work:
       Freelance systems development and programming, C, Clojure, Python, Database design,
       data science, etc.
     highlights:
+      - "Clojure library to support DFS datastores and the lamba architecture."
       - "Clojure library for better command line parsing."
       - "Clojure library for easy integration between dfs datastores and cascalog."
       - "System framework (Monte Carlo simulation) for analysing the extinction rate of the Lesser Prairie Chicken."
@@ -94,7 +95,9 @@ work:
         Delivery System (ODS). Key visible contributions are ODS Markup /
         Tagsets, ODS Packages, ODS Styles, Lua tagsets.
 
-        Designed and developed the Tagset programming language to enable
+        Designed and developed the Object family architecture which supports
+        the multiple output types that SAS is capable of. Creator of the
+        Tagset programming language to enable
         the creation of Markup Language based output types. The Tagset
         programming language enabled an open source spirit to the creation
         and customization of many different output types, and enabled
@@ -131,7 +134,7 @@ work:
         was also the design and creation of a cross platform development
         system and the creation of programming libraries to encapsulate
         databases and GUI tools to facilitate rapid development and
-        a cohesive end product. The use of TROFF to create easy and
+        a cohesive, well behaved end product. The use of TROFF to create easy and
         flexible reporting tools was also common.
 
 
@@ -155,6 +158,9 @@ work:
       - "Independent Oil & Gas - Created a publishing system using, Oracle,
         C, Troff and PIC which tracked the drilling and production of
         oil and gas wells."
+
+      - "Various other contracts to create systems from health care, to manufacturing
+        Quality control, inventory and shipping, and many others."
 
 # volunteer:
 #   - organization: "CoderDojo"

@@ -25,37 +25,31 @@ order: 4
 
 ## Systems Developer.
 
-"Over 35 years of experience in Unix, C, Databases, and what not.".
+"Too many years of experience in Unix, C, Databases, Python, Clojure, and what not.".
 {:.lead}
 
 <!-- ![Screenshot](assets/img/blog/hydejack-8.png){:.lead} -->
 <!-- Hydejack's cover page on a variety of screens. -->
 <!-- {:.figure} -->
 
-**Freelance Digital Nomad:** The last 2 years Eric has been spending half
-his time in france/Europe, and half in the United States. If you would
-like to sponsor him with a work Visa in europe, he would be delighted
-to talk with you about potential opportunities. Eric is available as a
-consultant on site or remote, and would consider relocating if the right
-project, position and location came along.
+**Freelance Digital Nomad:** The last few years Eric has been spending half
+his time in france/Europe, and half in the United States.
+Eric is available as a consultant on site or remote.
 
 **skills:** Eric is a power user of Unix, and has written programming languages, 
-publishing systems, Data analysis / data science, and Manufacturing work flows among other things.
+publishing systems, Data analysis / data science, and Manufacturing work flows and has
+worked in many domains.
 His designs are compromised of reusable and composable components which facilitate adaptability 
 and growth. He runs [Arch Linux](https://archlinux.org) on all of his
 computers, uses Emacs in Evil-mode as his editor and [XMonad](https://xmonad.org), written in
 _Haskell_, as [his window manager](https://github.com/EricGebhart/xmonad-setup).
 
-**Clojure** is the language that Eric has preferred in the last several years, but he has also
-worked with **Python** and **C** on smaller projects. *Scheme, rackett, haskell,
-common lisp, elisp, and lua* are a few of the other languages he also
-knows, some more than others. He has been primarily a backend developer
-for the last 20 years, but does have experience in **clojurescript**, **javascript** and the client
-server architecture.
+**Clojure** is the language that Eric has preferred in the last several years, but he has also worked with **Python** and **C** and Object oriented derivatives of C. Some other language experience includes  *Scheme, rackett, haskell,
+common lisp, elisp, and lua*  He has been primarily a backend developer
+for the last 20 years, In the 20 years before that he did full stack development including GUI frameworks and more recently has experience in **clojurescript**, **javascript** and the client server architecture.
 
 **NoSQL** or **SQL**, Eric is at home with both.  He has been using **Cascalog** with **hadoop** most 
-extensively along with some **Datomic** in the last 4 years, but has both used and written ORM's in C 
-and Python.
+extensively along with some **Datomic** in the last few4 years, but has both used and written ORM's in Clojure, C and Python.
 
 **Embedded** applications in *C* such as [qmk-firmware](https://github.com/qmk/qmk_firmware) 
 for the computer keyboards he builds, or the _Rep-Rap_ firmware for the core-xy 3D printer he built, 
@@ -91,8 +85,8 @@ been well recieved. His first series
 made in 2009-2010, were heavily influenced by the art of the 
 [Bauhaus](https://en.wikipedia.org/wiki/Bauhaus).  Recently he has adopted another style
 which is lighter, and can be made almost anywhere with almost no resources.
-Unfortunately they are very difficult to photograph, stayed tuned for additions to the
-portfolio on this site.
+Unfortunately they are very difficult to photograph, stay tuned for additions to the
+portfolio on this site. It has been years now, I still don´t know how to photograph them.
 
 
 <!-- a *blog* that is suitable for both prose and technical documentation, a *portfolio* to showcase your projects, and a beautiful *resume* template that looks amazing on the web and in print. -->
