@@ -10,30 +10,30 @@ DATE: [2022-08-05 Fri 17:21]
 ON: [2022-08-05 Fri 17:21]
 ---
 
-- [Emacsn, easily invoke Emacs, Emacs server, and Emacs client.](#org1dcafeb)
-  - [Introduction](#org67d7a48)
-    - [What did I need ?](#orgec1f1fc)
-  - [This script is old and well used.](#orga77e575)
-  - [Elisp functions that are invoked by some options.](#org4d2dfc9)
-  - [The emacsn command options help.](#org35b6fc8)
-  - [Examples from the help:   Follow any of them with one or more files to load.](#orgda259ac)
-    - [Stand alone Emacs](#org71dc178)
-    - [Using an an unnamed server daemon:](#org3e9c582)
-    - [Using a named emacs server daemon:](#org6d78226)
-  - [How I use it.](#org76c1037)
-    - [Browser command script](#orgaf5f99c)
-    - [Export browser command in .zprofile](#orgbfea5ff)
-    - [Xmonad gives me the sessions I need on the desktops I want them on.](#orgc7f863f)
-  - [The code](#orgc926e9f)
-  - [Summation](#org0a43fd0)
+- [Emacsn, easily invoke Emacs, Emacs server, and Emacs client.](#orgc03c804)
+  - [Introduction](#orgcd43b00)
+    - [What did I need ?](#orgb4deafb)
+  - [This script is old and well used.](#org82b6205)
+  - [Elisp functions that are invoked by some options.](#orgb2d43ab)
+  - [The emacsn command options help.](#orgf47c893)
+  - [Examples from the help:   Follow any of them with one or more files to load.](#org2a24c57)
+    - [Stand alone Emacs](#orgdc4693e)
+    - [Using an an unnamed server daemon:](#org069fe46)
+    - [Using a named emacs server daemon:](#orgb04258f)
+  - [How I use it.](#org49984e7)
+    - [Browser command script](#orge27ca60)
+    - [Export browser command in .zprofile](#org133f05a)
+    - [Xmonad gives me the sessions I need on the desktops I want them on.](#orgfd64780)
+  - [The code](#orgdaed2df)
+  - [Summation](#orgaab1168)
 
 
-<a id="org1dcafeb"></a>
+<a id="orgc03c804"></a>
 
 # Emacsn, easily invoke Emacs, Emacs server, and Emacs client.     :emacs:blog:
 
 
-<a id="org67d7a48"></a>
+<a id="orgcd43b00"></a>
 
 ## Introduction
 
@@ -44,7 +44,7 @@ I´ve been using emacs for a long time. At some point many years ago I wrote thi
 The permutations of options between emacs, and emacs client are numerous and conflicting. I just wanted something simple and consistent, that gave me all the power I needed. While also saving me the pain later on of wading through all the options and manual pages for them all just to figure out what I did in the first place. This is a very nice but simple script with verbose help. It normalizes options a bit just to create consistency.
 
 
-<a id="orgec1f1fc"></a>
+<a id="orgb4deafb"></a>
 
 ### What did I need ?
 
@@ -61,7 +61,7 @@ The permutations of options between emacs, and emacs client are numerous and con
 -   Execute an elisp function on startup.
 
 
-<a id="orga77e575"></a>
+<a id="org82b6205"></a>
 
 ## This script is old and well used.
 
@@ -72,7 +72,7 @@ I've had various elisp functions over the years, but now I only use *mu4e* and m
 There are unnamed server daemons and named server daemons. We want to connect to whichever. I want a specific emacs instance running mu4e because I don't want it messing with my other sessions. But maybe I just want to connect to it for an instant. Mu4e can become locked, there is only one xapian connection allowed, so its nice to have it in a server if opening more than one client to access it.
 
 
-<a id="org4d2dfc9"></a>
+<a id="orgb2d43ab"></a>
 
 ## Elisp functions that are invoked by some options.     :elisp:
 
@@ -105,7 +105,7 @@ Here are the only two custom elisp functions I use with the *-m* and *-b* option
 ```
 
 
-<a id="org35b6fc8"></a>
+<a id="orgf47c893"></a>
 
 ## The emacsn command options help.
 
@@ -124,14 +124,14 @@ Run a lisp function on startup. -e, -m, -b, -f -e Title it Email and eval mu4e. 
 -h This help text. -T title Give emacs that title. -t *emacs -nw* - run in a terminal. -w New window/frame &#x2013;create-frame. opposite of -t
 
 
-<a id="orgda259ac"></a>
+<a id="org2a24c57"></a>
 
 ## Examples from the help:   Follow any of them with one or more files to load.
 
 It´s probably overkill, but it´s nice to have examples.
 
 
-<a id="org71dc178"></a>
+<a id="orgdc4693e"></a>
 
 ### Stand alone Emacs
 
@@ -142,7 +142,7 @@ It´s probably overkill, but it´s nice to have examples.
 -   Start a browser session (run eaf-open-url) as a standalone emacs *emacsn -b duckduckgo.com*
 
 
-<a id="org3e9c582"></a>
+<a id="org069fe46"></a>
 
 ### Using an an unnamed server daemon:
 
@@ -151,7 +151,7 @@ It´s probably overkill, but it´s nice to have examples.
 -   Start a client in terminal: *emacsn -ct*
 
 
-<a id="org6d78226"></a>
+<a id="orgb04258f"></a>
 
 ### Using a named emacs server daemon:
 
@@ -166,12 +166,12 @@ It´s probably overkill, but it´s nice to have examples.
     -   Open an eaf browser on url in an new client window/frame: *emacsn -cws common -b duckduckgo.com*
     -   Open an eaf browser on url in an existing window/frame: *emacsn -cs common -b duckduckgo.com*
     -   Start a split frame session (main-window) in new frame: *emacsn -cws common -m MySessionTitle*
-    -   Start an mu4e email session. *emacsn -cews common*
+    -   Start an mu4e email session. *emacsn -cews mail*
     
     *- Start terminal session. /emacsn -cts common*
 
 
-<a id="org76c1037"></a>
+<a id="org49984e7"></a>
 
 ## How I use it.
 
@@ -196,7 +196,7 @@ I put my browser command in a script named <span class="underline"><span class="
 Here is the extra code bits that connect all the dots.
 
 
-<a id="orgaf5f99c"></a>
+<a id="orge27ca60"></a>
 
 ### Browser command script
 
@@ -205,14 +205,14 @@ This uses existing client if possible, connected to the *common* server. Adding 
 I put this in a file named *emacsbrowser* in my personal bin directory. \#+BEGIN<sub>SRC</sub> shell emacsn -cs common -b $1 \#+END<sub>SRC</sub> shell
 
 
-<a id="orgbfea5ff"></a>
+<a id="org133f05a"></a>
 
 ### Export browser command in .zprofile
 
 \#+BEGIN<sub>SRC</sub> shell export BROWSER=emacsbrowser \#+END<sub>SRC</sub> shell
 
 
-<a id="orgc7f863f"></a>
+<a id="orgfd64780"></a>
 
 ### Xmonad gives me the sessions I need on the desktops I want them on.
 
@@ -221,11 +221,11 @@ Examples of Xmonad topic entries for the MyQMK, Web, and Comm desktops.
 \#+BEGIN<sub>SRC</sub> haskell , TI "MyQMK" "play/myqmk/users/ericgebhart" (spawnInTopicDir "emacsn -m MyQMK README.md") , TI "Web" "" (spawnInTopicDir "emacsn -cws common -b duckduckgo.com" >> spawnInTopicDir "discord") , TI "Comm" "" (spawnInTopicDir "telegram-desktop" >> spawnInTopicDir "emacsn -cews mail") \#+END<sub>SRC</sub> haskell
 
 
-<a id="orgc926e9f"></a>
+<a id="orgdaed2df"></a>
 
 ## The code
 
-Here´s all the code minus most of the help text. [Get the full version here on my github.] (https://github.com/EricGebhart/dotfiles/blob/master/bin/emacsn) I find this code to be an excellent template for other simple shell scripts.
+Here´s all the code minus most of the help text. [Get the full version here on my github.] (<https://github.com/EricGebhart/dotfiles/blob/master/bin/emacsn>) I find this code to be an excellent template for other simple shell scripts.
 
 ```shell
 #!/usr/bin/env zsh
@@ -326,7 +326,7 @@ eval $mycommand
 ```
 
 
-<a id="org0a43fd0"></a>
+<a id="orgaab1168"></a>
 
 ## Summation
 
