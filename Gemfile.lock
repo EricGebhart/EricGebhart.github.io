@@ -1,8 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.7.0)
-      public_suffix (>= 2.0.2)
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
     colorator (1.1.0)
     concurrent-ruby (1.1.8)
     em-websocket (0.5.2)
@@ -35,6 +35,10 @@ GEM
       jekyll (>= 3.7, < 5.0)
     jekyll-optional-front-matter (0.3.2)
       jekyll (>= 3.0, < 5.0)
+    jekyll-org (1.1.1)
+      jekyll (>= 3.5.0)
+      json
+      org-ruby (>= 0.9.12)
     jekyll-paginate (1.1.0)
     jekyll-readme-index (0.3.0)
       jekyll (>= 3.0, < 5.0)
@@ -52,6 +56,7 @@ GEM
       jekyll (>= 3.3, < 5.0)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
+    json (2.6.2)
     kramdown (2.3.0)
       rexml
     kramdown-parser-gfm (1.1.0)
@@ -61,14 +66,17 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     mercenary (0.4.0)
+    org-ruby (0.9.12)
+      rubypants (~> 0.2)
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
-    public_suffix (4.0.6)
+    public_suffix (5.0.0)
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rexml (3.2.4)
     rouge (3.26.0)
+    rubypants (0.7.1)
     safe_yaml (1.0.5)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -84,6 +92,7 @@ DEPENDENCIES
   jekyll-default-layout
   jekyll-feed
   jekyll-optional-front-matter
+  jekyll-org (>= 1.1.0)
   jekyll-paginate
   jekyll-readme-index
   jekyll-redirect-from
